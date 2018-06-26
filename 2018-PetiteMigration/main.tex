@@ -233,7 +233,7 @@
     With GWT, the source program is composed with one class per web page.
     So, it is possible to have only one file that represents one web page.
     In this class, we find the widgets' architecture and organization.
-    It contains layout information such as VerticalPanel, HorizontalPanel, FlexPanel, etc.
+    It contains layout information such as \textit{VerticalPanel}, \textit{HorizontalPanel}, \textit{FlexPanel}, etc.
         and style information by using setter call to widgets to change the height, width, color, etc.
     The .java file contains also the business code link to the widgets.
     GWT demand one configuration file to declare all the web page's Java class to
@@ -338,13 +338,18 @@
     \section{Discussion}
     \label{sec:discussion}
     
-    % Critères d'évaluation
-    % - Ne pas déstabiliser les développeurs (garder l'architecture du logiciel proche) - évaluation avec les développeurs de la solution qu'on leur propose
-    % - Nombre de phase correctement détecté
-    % - Nombre de widget correctement détecté (on peut compter à la main sur 20 pages web)
-    % - Nombre de widget correctement placé (dans l'architecture sûrement pas 100% mais pas mal)
-    % - Nombre de widget visuellement correctement placé (notion d'attribut, de panel).. Ici on aura de mauvais résultat qui proviennent de l'analyse statique et non dynamique (qui est une contrainte forte pour nous)
-    
+    \bvc{Critères d'évaluation 
+        \begin{itemize} 
+            \item évaluation avec les développeurs de la solution qu'on leur propose 
+            \item Nombre de phase correctement détecté 
+            \begin{itemize} 
+                \item Nombre de widget correctement détecté (on peut compter à la main sur 20 pages web) ou via comparaison de DOM 
+                \item  Nombre de widget correctement placé (dans l'architecture sûrement pas 100\% mais pas mal) 
+            \end{itemize}   
+            \item Nombre de widget visuellement correctement placé (notion d'attribut, de panel).. Ici on aura de mauvais résultat qui proviennent de l'analyse statique et non dynamique (qui est une contrainte forte pour nous) 
+        \end{itemize}
+    }
+
     % Discussion of actual solution \emph{vs.} initial constraints from
     
     % Evaluation of the solution. How does the solution meet the criteria? Where
