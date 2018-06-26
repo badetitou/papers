@@ -18,7 +18,10 @@
     \usepackage{cite}
     \usepackage[pdftex,colorlinks=true,pdfstartview=FitV,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
     \usepackage{xspace}
-    
+
+    % natbib
+    \usepackage[numbers]{natbib}
+
 
     \input{macros}
 
@@ -129,13 +132,13 @@
     
     To extract information from the application, it is possible to use a dynamic solution or static one. 
     
-     \cite{samir2007swing2script} have proposed a dynamic solution to migrate Swing application to Ajax.
+     \citet{samir2007swing2script} have proposed a dynamic solution to migrate Swing application to Ajax.
     Their tool runs an instance of the source application in a browser.
     Then, they are able to detect the widget displayed by the interface and the different actions available.
     The authors have decided to use a dynamic solution to explore the interface of the application.
     Their contributions are a method and a middleware toolkit for re-architecting Swing application to Ajax one.
     
-    \cite{sanchez2014model} have developed a static solution to reverse engineer RAD (Rapid Application Development) based graphic user interface (GUI).
+    \citet{sanchez2014model} have developed a static solution to reverse engineer RAD (Rapid Application Development) based graphic user interface (GUI).
     The authors have created different metamodel to represent a GUI.
     The authors have used those to metamodels to create a chain of transformation between them which lead to the transformation of 
         the source  application the target one.
@@ -392,7 +395,9 @@
     \subsection*{Acknowledgements} 
     This work was supported by Ministry of Higher Education and Research, Nord-Pas de Calais Regional Council, CPER Nord-Pas de Calais/FEDER DATA Advanced data science and technologies 2015-2020.
     
-    \bibliographystyle{abbrv}
+    %\bibliographystyle{abbrv}
+    %natbib 
+    \bibliographystyle{plainnat}
     \bibliography{references}
     
     \end{document}
