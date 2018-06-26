@@ -1,0 +1,394 @@
+\documentclass[conference]{IEEEtran}
+\usepackage[T1]{fontenc} %%%key to get copy and paste for the code!
+\usepackage[utf8]{inputenc} %%% to support copy and paste with accents for french stuff
+\usepackage{times}
+\usepackage[scaled=0.85]{helvet}
+\usepackage{graphicx}
+\usepackage{ifthen}
+\usepackage{xspace}
+\usepackage{alltt}
+\usepackage{latexsym}
+\usepackage{url}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{stmaryrd}
+\usepackage{algorithmic}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{enumerate}
+\usepackage{cite}
+\usepackage[pdftex,colorlinks=true,pdfstartview=FitV,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\usepackage{xspace}
+
+
+\author{
+    \IEEEauthorblockN{Beno\^{i}t Verhaeghe, Anne Etien, \\ Nicolas Anquetil, St\'{e}phane Ducasse}\IEEEauthorblockA{Universit\'{e} de Lille, CNRS, Inria, \\ Centrale Lille, UMR 9189 -- CRIStAL, France\\}
+    \and
+    \IEEEauthorblockN{Abderrahmane Seriai, Laurent Deruelle}\IEEEauthorblockA{Berger-Levrault, France}     
+}
+
+\begin{document}
+\title{GWT to Angular: Migration of graphic applications through Models}
+% Si méthode autre fonctionne... Application de la méthode à notre cas d'étude ...
+
+\date{\today}
+\maketitle
+
+% une idée par paragraphe !
+% Un message par paragraphe !
+% Mettre dans une commande commentaire (en bleu par exemple) l'idée du paragraphe
+% Si related work au début. Peut être plus en lien avec le reste. Et on explique pourquoi les autres n'explique pas.
+    % Du coup ou ne décrit pas par rapport à nous.
+% Si related work à la fin, comparaison par rapport à nous (car on aura présenté notre travail)
+% - A la fin de chaque partie
+
+
+%% Fin introduction -> Essayer de mieux définir le problème.
+    % Et donc expliciter pourquoi ça ne marche avec les trucs de "l'état de l'art"
+
+% Contrainte -> expliquer pourquoi on a ces contraintes.
+% Enlever toute les contraintes en rapport à notre solution.
+
+% Faire lien phrase entre celle d'avant et celle d'après...
+
+\begin{abstract}
+% In this context...
+% We consider this problem P...
+% P is a problem because...
+% We propose this solution...
+% Our solution solves P in such and such way.
+
+    In the context of the graphical application evolution, it happens that the application must switch of implementation language.
+    Berger-Levrault is a major IT company which owns the biggest GWT application in the world. 
+    The company needs to switch the application implementation of all its software from GWT to Angular.
+    Rewriting graphical application is complex and can lead to errors.
+    The transformation from Java to Web Technology (\textit{i.e.} HTML, CSS, Javascript, Angular (Typescript)) imply 
+        modifications of the application structure. 
+    Moreover, the migration must not impact the clients of Berger-Levrault.
+    And so the visual aspect of the migrated application have to be the same as the original one.
+    The company has estimated the duration of the migration to X.
+    To reduce the among of time needed, we've created a tool that semi-automatically does the migration of the application.
+    To achieve this tool, we've designed a metamodel to represent a graphical user interface.
+    Then we have used a three parts application migration strategy and the tools to apply such strategy.
+    Firstly, we have instantiated a metamodel from the source code.
+    Then, we have generated a model that respects the metamodel we've defined to represent a graphic application from the model of the source code.
+    Finally, we have exported the \textit{"graphic"} model to the target code.
+\end{abstract}
+
+\begin{IEEEkeywords}
+    Graphical User Interfaces, Industrial case study, Java, Angular, GWT, 
+    Migration, Model-Driven Engineering, MDE
+\end{IEEEkeywords}
+
+
+\section{Introduction}
+\label{sec:intro}
+
+% Contexte
+% - Entreprise internationale
+% - Logiciel de plus de X MLOC
+% - Nombre d'écran
+% - Année d'existence (RH +~ 10 ans)
+% - Nombre de dev
+% - GWT en perte de vitesse
+
+Berger-Levrault is a major IT company.
+It uses the framework GWT to develop its graphics applications.
+GWT doesn't evolve these years with only one major release since 2015 whereas there was six major release between 2010 and 2013.
+So, Berger-Levrault has decided to migrate all its application from Java using GWT to the Angular technology.
+The applications Berger-Levrault are long life applications (more than ten years),
+    they have more than X MLOC and represent
+    X web pages. 
+This specificities plus the fact that developers don't work in the same company for years implies
+    a problem of perfect knowledge of the applications.
+No one knows all the code of an application so it leads to migration of unused code or 
+    \emph{hack} that were important in the source language but which create errors in the target one.
+This is why such migration is time-consuming and error-prone.
+Berger-Levrault has estimated the duration of the migration to
+At the same time, the company needs to continue the development of their applications during the migration.
+
+% Problème
+% - Target independence
+% - Changement de langage imposant un changement dans l'architecture du projet et la division en plusieurs fichiers.
+
+The migration of an application is not only the transformation of the source code to the target language. 
+It also implies to find the frameworks to use in the target language 
+    and to think about the architecture of the applications in the new language.
+The migration should have a really tiny impact on the client of the company and for the developers of the application.
+In the case of Berger-Levrault, multiple applications are developed following the same architecture
+    but some other used different framework or language like ReactJS, Aurelia, Laravel or Silverlight.
+So, it is important to have a solution that can be reused for all the graphic applications with a minimum of modification.
+
+% Known tracks for \sd{solutions} here you want to show that you are not an idiot not knowing what have been around
+% Pourquoi on ne peut pas utiliser les autres papiers ( du point de vue leurs methodologies )
+% - Stratégie dynamique inexploitable au vue de la combinatoire induit par la taille application, et ne peut pas être mise chez les clients (trop lente) -- \cite{samir2007swing2script}
+% - Pour RAD \cite{sanchez2014model}, la complexité des interfaces de Berger-levrault fait que des éléments ne sont pas visible à l'écran
+
+To extract information from the application, it is possible to use a dynamic solution or static one. 
+
+\cite{samir2007swing2script} have proposed a dynamic solution to migrate Swing application to Ajax.
+Their tool runs an instance of the source application in a browser.
+Then, they are able to detect the widget displayed by the interface and the different actions available.
+The authors have decided to use a dynamic solution to explore the interface of the application.
+Their contributions are a method and a middleware toolkit for re-architecting Swing application to Ajax one.
+
+\cite{sanchez2014model} have developed a static solution to reverse engineer RAD (Rapid Application Development) based graphic user interface (GUI).
+The authors have created different metamodel to represent a GUI.
+The authors have used those to metamodels to create a chain of transformation between them which lead to the transformation of 
+    the source  application the target one.
+Although we can't reapply the strategy of GUI extraction to our project, because RAD based application is too \emph{simple} compared to GWT based application,
+    the different metamodels and the chain of transformation inspired our work.
+
+% What our solution is \ct{Set} and \ct{OrderedCollection} (so that the reader knows where the paper is going)
+% - Un outil réutilisable
+% - Migrer l'ensemble du code lié à l'interface Graphique (sans code métier) -> Mesurable
+% - Recherche de correspondance entre ancien et nouveau framework (GWT to HTML/PrimeNG)
+
+We present a new static solution to represent a GUI developed with Java-Swing, 
+    a strategy to generate this model,
+    a way to generate the target application whatever the target framework Architecture.
+Our solution is source and target independent.
+The tool detects well X\% of the widget for a web page.
+After the migration, X\% widgets are well placed and X\% are visually identical.
+
+% Contribution of the paper
+% - Une méthodologie et un outil modulaire pour migrer l'aspect graphique d'une application
+
+The main contributions of our work are:
+\begin{itemize}
+
+    \item a modular tool that can be reused for other graphics application migration.
+
+    \item a metamodel to represent a GUI application.
+
+    \item a migration strategy to migrate graphics application.
+    
+\end{itemize}
+
+% Paper structure
+
+In Section~\ref{sec:problem}, we give background information on our problem. 
+Then, in Section~\ref{sec:contribution}, we describe the solution we've proposed.
+Section~\ref{sec:discussion} presents the results and threats to the validity of our works.
+Finally, we present the related works and conclude in Section~\ref{sec:related} and~\ref{sec:conclusion} respectively.
+
+\section{Problem Description}
+\label{sec:problem}
+
+% Context, exposed with the \textbf{most precise terms possible} (don't open
+% unwanted doors for the reader)
+
+Berger-Levrault is a major IT company which needs to migrate
+    their GWT-based applications to Angular.
+The migration of those applications will lead to X days of development.
+This is due to the X MLOC that composed the software they have to migrate.
+Our work was tested on the showroom application of Berger-Levrault. 
+This application is used only by the company's developers as
+    an example application of the usage of the widget available for the development.
+
+% Probably set the vocabulary before to cut any misinterpretation
+
+% Constraints that influenced the solution (because the solution is not
+% universal) \emph{e.g.} our requirements for a solution, possibly not all
+% satisfied. They should be sound and believable. Analysis of the criteria.
+% Imagine that you are another guy having this problem do the constraint
+% matches yours so that you could apply the solution
+
+\subsection{Constraints}
+
+The solution we propose must respect some criteria:
+\begin{itemize}
+    \item \emph{Source independence}. Our solution should be easy to adapt
+        for all project written in GWT using Java and for
+        application not written in Java but describing a GUI.
+    \item \emph{Target independence}. It has to be easy to change the target
+        language without restructuring the metamodel we have defined or 
+        change any stage of the migration.
+    \item \emph{Modularity}. The migration would be split into many little
+        stages. This offer the possibility to easily extend a step or 
+        replace one step by another one without introducing instability. 
+    \item \emph{Preserving Architecture}. After the migration, we should find
+        the same architecture between the different component of the GUI (\emph{e.g.}
+        a button which belongs to a panel in the source application still belongs to the same panel in the target application ).
+    \item \emph{Layout-preserving visual}. It should not have visual differences
+        between the source application and the target one.
+\end{itemize}
+
+The development team has to continue the maintenance of the source application.
+This is a constraint inherent to industrial companies.
+
+\subsection{GWT and Angular Comparison}
+% Problem
+The source language and the target language can have two different architecture.
+Those difference can be syntactical, semantical and also architectural. % Reference !
+In the case of the migration of the application from Java using GWT to Angular, 
+    the .java file will be separated into multiple Angular files.
+
+With GWT, it has one class per web page.
+So, it is possible to have only one file that represents one web page.
+In this class, we find the widgets' architecture and organization.
+It contains layout information such as VerticalPanel, HorizontalPanel, FlexPanel, etc.
+    and style information by using setter call to widgets to change the height, width, color, etc.
+The .java file contains also the business code link to the widgets.
+GWT demand one configuration file to declare all the web page's Java class to
+    determine the URL path to access to the web pages.
+
+\begin{table}[hbtp]
+\caption{Comparison of GWT architecture and Angular one}
+\label{tab:gwtArchitectureToAngular}
+\begin {center}
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{|p{3cm}|p{3cm}|p{3cm}|}
+    \hline
+    Differences & Java using GWT & Angular \\
+    \hline
+    number of configuration file & one configuration file & four configuration files plus two files per subprojects \\
+    \hline
+    web page & one java class & one Typescript file plus one HTML file \\
+    \hline
+    style for a web page & include in java class & one optional CSS file \\
+    \hline
+\end{tabular} %
+}
+\end{center}
+\end{table}
+
+% TODO - Je dois citer le tableau quelque part
+
+With Angular, those pieces of information are dispatched in multiple files.
+First of all, Angular is a Single Page framework based on Component,
+    which means there will be only one web page 
+    and we will navigate into this web page.
+A component is a sub-part of a web page.
+It can be a complex widget like a calendar,
+    a part of a webpage like a sidebar
+    or a complete webpage.
+A component can contain other components, 
+    so the component representing a webpage can contain the sidebar component,
+    and this last contains the calendar.
+Only the reached web page content is loaded.
+At the root of the Angular project,
+    it has the main configuration files.
+Those files explicit the frameworks that will be used in the application.
+Then for each web page, we will find the following structure.
+A folder that contains at least an HTML file, a TypeScript file.
+It can also contain a CSS file, and some configuration file.
+The configuration files contain specific needed of the webpage.
+It can be compared to the \textit{import} call in Java.
+The CSS file contains the specific style for this webpage.
+The TypeScript file contains the behavioral business logic of the webpage. 
+The HTML file contains the architecture of the webpage and the layout information.
+The layout information is expressed by the class attribute defined in a general CSS file 
+    at the root of the project. 
+
+% Factual solution tracks, to position...
+% Our solution in a nutshell.
+
+\subsection{Migration strategy solutions}
+
+There are different solutions to migrate an application.
+All the solution have to conclude with the respect of the two major constraints, 
+    the respect of the target architecture and the visual preservation.
+
+\begin{itemize}
+    
+    \item \emph{Manual Migration}. This strategy is the re-development of the all application
+        without using semi-automatic migration tool.
+    This strategy offers the possibility to easily fix some error of the old application and to 
+        redesign the application following architecture principle of the target language. % TODO -  citation fleurey
+
+    \item \emph{Rule Engine}. Using a rule engine to migrate the totality or part of an application has
+            already been applied in some project. % TODO - reference Brant
+        We have to define and create rules to use this solution.
+        It is possible migration is not completed by the strategy, so the developers will have to
+            end the process of migration by some manual work.
+        Using a rule engine can be efficient but it implies to not be source independent nor target independent.
+
+    \item \emph{Model-Driven Engineering (MDE)}. Model-Driven Engineering implies the development of metamodels
+        to do the migration.
+        This strategy follows all the constraint we have defined.
+        It is also possible to an automatic or a semi-automatic migration with MDE strategy.
+        This last implies to do some manual work to complete the migration processus.
+
+\end{itemize}
+
+Because we need to conform our solution to the constraint of this kind of migration
+    and of the company, we have developed a migration tool that uses Model-Driven Engineering strategy. 
+
+\section{Proposed Solution}
+\label{sec:contribution}
+
+\subsection{metamodel}
+
+\subsection{Import}
+
+\subsection{Export}
+
+% Free form, variable number of sections, technical details.
+
+% But in general do not mix solution and discussions/possible variation
+% let that for discussion
+
+\section{Discussion}
+\label{sec:discussion}
+
+% Critères d'évaluation
+% - Ne pas déstabiliser les développeurs (garder l'architecture du logiciel proche) - évaluation avec les développeurs de la solution qu'on leur propose
+% - Nombre de phase correctement détecté
+% - Nombre de widget correctement détecté (on peut compter à la main sur 20 pages web)
+% - Nombre de widget correctement placé (dans l'architecture sûrement pas 100% mais pas mal)
+% - Nombre de widget visuellement correctement placé (notion d'attribut, de panel).. Ici on aura de mauvais résultat qui proviennent de l'analyse statique et non dynamique (qui est une contrainte forte pour nous)
+
+% Discussion of actual solution \emph{vs.} initial constraints from
+
+% Evaluation of the solution. How does the solution meet the criteria? Where
+% does it succeed or fails...
+
+
+\section{Related Works}
+\label{sec:related}
+
+% Other solutions in the domain, and a real comparison of our contribution with
+% solutions from other people.
+
+
+\section{Future Works}
+\label{sec:future}
+
+% Futur Work
+% - Détection du Code Metier
+% - Préservation de la disposition des éléments graphique dans l'interface (layout)
+% - Préservation de l'aspect graphique des éléments graphiques (css)
+
+\section{Conclusion}
+\label{sec:conclusion}
+
+% In this paper, we \textsf{looked}\xspace at problem P with this context and these
+% constraints. We proposed solution S. It has such good points and such not so
+% good ones. Now we could do this or that.
+
+In this paper, we have exposed a solution to the problem of visual preservation
+    and respect of the target architecture during the migration of an application.
+Our work has shown encouraging results with the case study of Berger-Levrault.
+We have migrated complex and simple web pages from the applications of Berger-Levrault.
+The tool currently migrates correctly X\% of a web page. % TODO - difference complex web page and simple one
+To do so, we have used a strategy based on a metamodel.
+We have presented the strategy and its implementation in Pharo.
+Our solution allows us to migrate a web page following the target architecture and
+    with a correct widget hierarchy.
+The visual aspect of the rendered application could differ from the original one because of
+    the layout applied to the first one.
+This work can be used as a support to improve the migration of Graphical User Interface. 
+The migration of the business code of the original application is
+    a feature that can help developers.
+It would be also interesting to improve the way the layout is represented or
+    to define which kind tool, on top of the model, can help the developers 
+    with the migration or their daily development.
+ 
+
+\subsection*{Acknowledgements} 
+This work was supported by Ministry of Higher Education and Research, Nord-Pas de Calais Regional Council, CPER Nord-Pas de Calais/FEDER DATA Advanced data science and technologies 2015-2020.
+
+\bibliographystyle{abbrv}
+\bibliography{references}
+
+\end{document}
