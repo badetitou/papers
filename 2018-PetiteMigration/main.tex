@@ -63,22 +63,22 @@
     % Our solution solves P in such and such way.
     
         In the context of the graphical application evolution, it happens that the application must switch of implementation language.
+        This evolution should be done by companies which want to stay\textit{Up-to-Date} with the latest technology.
+        It is also an important commercial argument to keep and attract clients.
         Berger-Levrault is a major IT company which owns the biggest GWT application in the world. 
-        The company needs to switch the application implementation of all its software from GWT to Angular.
+        The company needs to switch the application implementation of its software from GWT to Angular.
         Rewriting graphical application is complex and can lead to errors.
-        The transformation from Java to Web Technology (\textit{i.e.} HTML, CSS, Javascript, Angular (Typescript)) implies
+        Furthermore, the transformation from an implementation to another implies
             modifications of the application structure. 
         Moreover, the migration must not impact the clients of Berger-Levrault.
         And so the visual aspects of the migrated application have to be the same as the original one.
         The company has estimated the duration of the migration to X.
         To reduce the amont of time needed, we've created a tool that semi-automatically does the migration of the application.
-        To achieve this tool, we designed a metamodel to represent a graphical user interface.
-    
-        % On voit pas bien la différence
-        Then we have used a three parts application migration strategy and the tools to apply such strategy.
-        Firstly, we have instantiated a metamodel from the source code.
-        Then, we have generated a model that respects the metamodel we've defined to represent a graphic application from the model of the source code.
-        Finally, we have exported the \textit{"graphic"} model to the target code.
+        To achieve this tool, we designed a metamodel to represent a graphical user interface (GUI\footnote{Graphical User Interface} metamodel).
+        Then we used a three parts application migration strategy and the tools to apply such strategy.
+        Firstly, we instantiated a metamodel from the source code.
+        Then, transform the resulted model to a model that respects GUI metamodel.
+        Finally, we exported the \textit{"graphic"} model to the target code.
     \end{abstract}
     
     \begin{IEEEkeywords}
@@ -132,15 +132,15 @@
     
     To extract information from the application, it is possible to use a dynamic solution or static one. 
     
-     \citet{samir2007swing2script} have proposed a dynamic solution to migrate Swing application to Ajax.
+     \citet{samir2007swing2script} proposed a dynamic solution to migrate Swing application to Ajax.
     Their tool runs an instance of the source application in a browser.
     Then, they are able to detect the widget displayed by the interface and the different actions available.
-    The authors have decided to use a dynamic solution to explore the interface of the application.
+    The authors decided to use a dynamic solution to explore the interface of the application.
     Their contributions are a method and a middleware toolkit for re-architecting Swing application to Ajax one.
     
-    \citet{sanchez2014model} have developed a static solution to reverse engineer RAD (Rapid Application Development) based graphic user interface (GUI).
-    The authors have created different metamodel to represent a GUI.
-    The authors have used those to metamodels to create a chain of transformation between them which lead to the transformation of 
+    \citet{sanchez2014model} developed a static solution to reverse engineer RAD (Rapid Application Development) based graphic user interface (GUI).
+    The authors created different metamodel to represent a GUI.
+    The authors used those to metamodels to create a chain of transformation between them which lead to the transformation of 
         the source  application the target one.
     Although we can't reapply the strategy of GUI extraction to our project, because RAD based application is too \emph{simple} compared to GWT based application,
         the different metamodels and the chain of transformation inspired our work.
@@ -208,7 +208,7 @@
             for all projects written in GWT using Java and for
             applications not written in Java but describing a GUI.
         \item \emph{Target independence}. It has to be easy to change the target
-            language without restructuring the metamodel we have defined or 
+            language without restructuring the metamodel we defined or 
             change any stage of the migration.
         \item \emph{Modularity}. The migration would be split into many little
             stages. This offer the possibility to easily extend a step or 
@@ -312,14 +312,14 @@
     
         \item \emph{Model-Driven Engineering (MDE)}. Model-Driven Engineering implies the development of metamodels
             to do the migration.
-            This strategy follows all the constraint we have defined.
+            This strategy follows all the constraint we defined.
             It is also possible to an automatic or a semi-automatic migration with MDE strategy.
             This last implies to do some manual work to complete the migration processus.
     
     \end{itemize}
     
     Because we need to conform our solution to the constraint of this kind of migration
-        and of the company, we have developed a migration tool that uses Model-Driven Engineering strategy. 
+        and of the company, we developed a migration tool that uses Model-Driven Engineering strategy. 
     
     \section{Proposed Solution}
     \label{sec:contribution}
@@ -378,13 +378,13 @@
     % constraints. We proposed solution S. It has such good points and such not so
     % good ones. Now we could do this or that.
     
-    In this paper, we have exposed a solution to the problem of visual preservation
+    In this paper, we exposed a solution to the problem of visual preservation
         and respect of the target architecture during the migration of an application.
     Our work has shown encouraging results with the case study of Berger-Levrault.
-    We have migrated complex and simple web pages from the applications of Berger-Levrault.
+    We migrated complex and simple web pages from the applications of Berger-Levrault.
     The tool currently migrates correctly X\% of a web page. % TODO - difference complex web page and simple one
-    To do so, we have used a strategy based on a metamodel.
-    We have presented the strategy and its implementation in Pharo.
+    To do so, we used a strategy based on a metamodel.
+    We presented the strategy and its implementation in Pharo.
     Our solution allows us to migrate a web page following the target architecture and
         with a correct widget hierarchy.
     The visual aspect of the rendered application could differ from the original one because of
