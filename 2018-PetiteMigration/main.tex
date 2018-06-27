@@ -267,7 +267,7 @@
     \resizebox{\columnwidth}{!}{%
     \begin{tabular}{|p{3cm}|p{3cm}|p{3cm}|}
         \hline
-        Differences & Java using GWT & Angular \\
+         & Java using GWT & Angular \\
         \hline
         number of configuration file & one configuration file & four configuration files plus two files per subprojects \\
         \hline
@@ -280,7 +280,7 @@
     \end{center}
     \end{table}
     
-    % TODO - Je dois citer le tableau quelque part
+    \bv{citer tab}
     
     With Angular, those pieces of information are dispatched in multiple files.
     First of all, Angular is a Single Page framework based on Component,
@@ -314,20 +314,22 @@
     \subsection{Migration strategy solutions}
     
     There are different solutions to migrate an application.
-    All the solutions have to conclude with the respect of the two major constraints, 
-        the respect of the target architecture and the visual preservation.
+    All the solutions have to conclude with the respect of the constraints defined section \ref{sec:constraints}
     
+    \bv{Justifier les Migrations}
+
     \begin{itemize}
         
         \item \emph{Manual Migration}. This strategy is the re-development of the all application
             without using semi-automatic migration tool.
         This strategy offers the possibility to easily fix some error of the old application and to 
-            redesign the application following architecture principle of the target language. % TODO -  citation fleurey
+            redesign the application following architecture principle of the target language \citep{fleurey2007model}\bv{comment bien faire une citation ? (intro sec 5)}.
     
         \item \emph{Rule Engine}. Using a rule engine to migrate the totality or part of an application has
-                already been applied in some project. % TODO - reference Brant
-            We have to define and create rules to use this solution.
-            It is possible migration is not completed by the strategy, so the developers will have to
+                already been applied in some project \citep{brant2010extreme, feldman1991availability, terwilliger2012automatic}.
+            We have to define and create transformation rules to use this solution.
+            The rules takes as input some piece of source code and gives as output the migrated code.
+            It is possible that the migration is not completed by the strategy, so the developers will have to
                 end the process of migration by some manual work.
             Using a rule engine can be efficient but it implies to not be source independent nor target independent.
     
