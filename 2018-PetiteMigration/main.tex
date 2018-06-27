@@ -23,7 +23,7 @@
     \usepackage[numbers]{natbib}
 
 
-    \input{../myConfig/macros}
+    \input{macros}
 
     \author{
         \IEEEauthorblockN{Beno\^{i}t Verhaeghe$^{1,2}$, Anne Etien$^1$,\\ Nicolas Anquetil$^1$, St\'{e}phane Ducasse$^1$}\IEEEauthorblockA{$^1$Universit\'{e} de Lille, CNRS, Inria, \\ Centrale Lille, UMR 9189 -- CRIStAL, France\\}
@@ -98,20 +98,22 @@
     % - Nombre de dev
     % - GWT en perte de vitesse
     
+    \bvc{Desc de BL, et de leurs besoins}
     Berger-Levrault is a major IT company.
     It uses the framework GWT to develop its graphics applications.
     GWT doesn't evolve almost any more with only one major release since 2015 whereas there was six major releases between 2010 and 2013.
     So, Berger-Levrault has decided to migrate all its application from Java using GWT to the Angular technology.
-    The applications Berger-Levrault are long life applications (more than ten years),
-        they have more than X MLOC and represent
-        X web pages. 
-    This specificities plus the fact that developers don't work in the same company for years implies
-        a problem of perfect knowledge of the applications.
-    No one knows all the code of an application so it leads to migration of unused code or 
-        \emph{hack} that were important in the source language but which create errors in the target one.
+    The main aim is to avoid to be stuck in an old technology.
+
+    \bvc{Desc des applications de BL (général) et que leurs tailles et tmps de vie est un pb}
+    Software of Berger-Levrault are long life applications (more than ten years),
+        they have more than X MLOC and represent X web pages.
+    The lifespan of the program implies that no one in the company has a \textit{"perfect"} knowledge of the applications.
+    This lack of information leads to difficulties for the migration.
+    Indeed, migrating unused code and 
+        \emph{hack} that were important in the source language create errors in the target one.
     This is why such migration is time-consuming and error-prone.
     Berger-Levrault has estimated the duration of the migration to X.
-    At the same time, the company needs to continue the development of their applications during the migration.
     
     % Problème
     % - Target independence
@@ -402,7 +404,7 @@
     
     %\bibliographystyle{abbrv}
     %natbib 
-    \bibliographystyle{../myConfig/myplainnat}
+    \bibliographystyle{myplainnat}
     \bibliography{references}
-     
+    
     \end{document}
