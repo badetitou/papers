@@ -119,43 +119,36 @@
     % - Target independence
     % - Changement de langage imposant un changement dans l'architecture du projet et la division en plusieurs fichiers.
     
-    The migration of an application is not only the transformation of the source code to the target language. 
-    It also implies to find the frameworks to use in the target language 
-        and to think about the architecture of the applications in the new language.
-    The migration should have a really tiny impact on the client of the company and for the developers of the application.
-    In the case of Berger-Levrault, multiple applications are developed following the same architecture
-        but some other used different framework or language like ReactJS, Aurelia, Laravel or Silverlight.
-    So, it is important to have a solution that can be reused for all the graphic applications with a minimum of modification.
+    \bvc{Definition du problème. Solution générique de migration d'interface}
+    The migration of an application can be done by rewriting all the application in the target language.
+    But, in the case of a migration in a company, it must respect many criteria.
+    Those criteria are detailed section \ref{sec:constraints}.
+    Moreover, re-writing separately the applications can be done but it is time-consuming.
+    The main problem is to define a strategy to pilot the migration.
+
+    
+    % The migration of an application is not only the transformation of the source code to the target language.   
+    % It also implies to find the frameworks to use in the target language 
+    %     and to think about the architecture of the applications in the new language.
+    % The migration should have a really tiny impact on the client of the company and for the developers of the application.
+    % In the case of Berger-Levrault, multiple applications are developed following the same architecture
+    %     but some other used different framework or language like ReactJS, Aurelia, Laravel or Silverlight.
+    % So, it is important to have a solution that can be reused for all the graphic applications with a minimum of modification.
     
     % Known tracks for \sd{solutions} here you want to show that you are not an idiot not knowing what have been around
     % Pourquoi on ne peut pas utiliser les autres papiers ( du point de vue leurs methodologies )
     % - Stratégie dynamique inexploitable au vue de la combinatoire induit par la taille application, et ne peut pas être mise chez les clients (trop lente) -- \cite{samir2007swing2script}
     % - Pour RAD \cite{sanchez2014model}, la complexité des interfaces de Berger-levrault fait que des éléments ne sont pas visible à l'écran
     
-    To extract information from the application, it is possible to use a dynamic solution or static one. 
-    
-     \citet{samir2007swing2script} proposed a dynamic solution to migrate Swing application to Ajax.
-    Their tool runs an instance of the source application in a browser.
-    Then, they are able to detect the widget displayed by the interface and the different actions available.
-    The authors decided to use a dynamic solution to explore the interface of the application.
-    Their contributions are a method and a middleware toolkit for re-architecting Swing application to Ajax one.
-    
-    \citet{sanchez2014model} developed a static solution to reverse engineer RAD (Rapid Application Development) based graphic user interface (GUI).
-    The authors created different metamodel to represent a GUI.
-    The authors used those to metamodels to create a chain of transformation between them which lead to the transformation of 
-        the source  application the target one.
-    Although we can't reapply the strategy of GUI extraction to our project, because RAD based application is too \emph{simple} compared to GWT based application,
-        the different metamodels and the chain of transformation inspired our work.
     
     % What our solution is \ct{Set} and \ct{OrderedCollection} (so that the reader knows where the paper is going)
     % - Un outil réutilisable
-    % - Migrer l'ensemble du code lié à l'interface Graphique (sans code métier) -> Mesurable
-    % - Recherche de correspondance entre ancien et nouveau framework (GWT to HTML/PrimeNG)
-    
-    We present a new static solution to represent a GUI developed with Java-Swing, 
+    % - une stratégie de migration
+    \bvc{what our solution is ? un outil reutilisable/une stratégie de migration}
+    We present a strategy that will let the developers to migrate their graphical application.
+    This strategy include a GUI metamodel,
         a strategy to generate this model,
-        a way to generate the target application whatever the target framework Architecture.
-    Our solution is source and target independent.
+        a way to generate the target application whatever the target framework Architecture is.
     The tool detects well X\% of the widget for a web page.
     After the migration, X\% widgets are well placed and X\% are visually identical.
     
@@ -186,10 +179,12 @@
     % Context, exposed with the \textbf{most precise terms possible} (don't open
     % unwanted doors for the reader)
     
-    Berger-Levrault is a major IT company which needs to migrate
-        their GWT-based applications to Angular.
-    The migration of those applications will lead to X days of development.
+    \bvc{Prez context}
+    In the context of the evolution of the applications of Berger-Levrault
+        from GWT-based program to Angular, the company has estimated X days of development to complete the migration process.
     This is due to the X MLOC that composed the software they have to migrate.
+    A aim of our work with Berger-Levrault is to provide a strategy that support
+        the migration process to reduce the necessary time of the program transformation.
     Our work was tested on the showroom application of Berger-Levrault. 
     This application is used only by the company's developers as
         an example application of the usage of the widget available for the development.
@@ -203,23 +198,47 @@
     % matches yours so that you could apply the solution
     
     \subsection{Constraints}
-    
+    \label{sec:constraints}
+
     The solution we propose must respect some criteria:
     \begin{itemize}
-        \item \emph{Source independence}. Our solution should be easy to adapt
+        \item \emph{Source independence}. The solution should be easy to adapt
             for all projects written in GWT using Java and for
             applications not written in Java but describing a GUI.
+            This constraint must be respected to be able to use the solution
+            for different project. In the context of Berger-Levrault, it will allow
+            the developers to apply the solution to the different piece of software
+            they have to migrate. 
+
         \item \emph{Target independence}. It has to be easy to change the target
-            language without restructuring the metamodel we defined or 
-            change any stage of the migration.
+            language without restructuring most of the implementation of the solution.
+            This constraint guarantee that the solution can be used whatever the architecture
+            of the target language. 
+            
+            In our case study, we try to migrate GWT-based application to Angular.
+            Angular got six different major versions since 2016.
+            Thanks to the target independence, the strategy is still valid for the migration
+                to another target language or a different version of the original program source code language.
+
         \item \emph{Modularity}. The migration would be split into many little
             stages. This offer the possibility to easily extend a step or 
-            replace one step by another one without introducing instability. 
+            replace one step by another one without introducing instability.
+            It is essential for a company that need fine-grained control on the migration process.
+            With the Modularity, the companies can customize every part of the solution
+                to respect specific constraint they own.
+
         \item \emph{Preserving Architecture}. After the migration, we should find
             the same architecture between the different component of the GUI (\emph{e.g.}
-            a button which belongs to a panel in the source application still belongs to the same panel in the target application ).
-        \item \emph{Layout-preserving visual}. It should not have visual differences
+            a button which belongs to a panel in the source application still belongs to the same panel in the target application).
+            This constraint has two interests.
+            It will facilitated the work of the developers of the application because,
+                it should be easier for them to understand an application with the same architecture\bv{ref?}.
+
+        \item \emph{Visual Layout-preserving}. It should not have visual differences
             between the source application and the target one.
+            This is especially important for commercial software.
+            Indeed, the user of the application must not be disturb by the migration.
+            So, preserving the layout will lead to no interface impact for the final user. 
     \end{itemize}
     
     The development team has to continue the maintenance of the source application.
@@ -363,6 +382,22 @@
     
     % Other solutions in the domain, and a real comparison of our contribution with
     % solutions from other people.
+
+    
+    To extract information from the application, it is possible to use a dynamic solution or static one. 
+    
+     \citet{samir2007swing2script} proposed a dynamic solution to migrate Swing application to Ajax.
+    Their tool runs an instance of the source application in a browser.
+    Then, they are able to detect the widget displayed by the interface and the different actions available.
+    The authors decided to use a dynamic solution to explore the interface of the application.
+    Their contributions are a method and a middleware toolkit for re-architecting Swing application to Ajax one.
+    
+    \citet{sanchez2014model} developed a static solution to reverse engineer RAD (Rapid Application Development) based graphic user interface (GUI).
+    The authors created different metamodel to represent a GUI.
+    The authors used those to metamodels to create a chain of transformation between them which lead to the transformation of 
+        the source  application the target one.
+    Although we can't reapply the strategy of GUI extraction to our project, because RAD based application is too \emph{simple} compared to GWT based application,
+        the different metamodels and the chain of transformation inspired our work.
     
     
     \section{Future Works}
