@@ -333,8 +333,7 @@
                 end the process of migration by some manual work.
             Using a rule engine can be efficient but it implies to not be source independent nor target independent.
     
-        \item \emph{Model-Driven Engineering (MDE)}. Model-Driven Engineering implies the development of metamodels
-            to do the migration.
+        \item \emph{Model-Driven Engineering (MDE)}. Model-Driven Engineering implies the development of metamodels to do the migration.
             This strategy follows all the constraint we defined.
             It is also possible to an automatic or a semi-automatic migration with MDE strategy.
             This last implies to do some manual work to complete the migration processus.
@@ -347,11 +346,75 @@
     \section{Proposed Solution}
     \label{sec:contribution}
     
-    \subsection{metamodel}
+    \bvc{context solution proposé}
+    We designed and implemented a migration strategy based on Model-Driven Engineering.
+    The migration strategy is divided into three steps, 
+        the creation of a model of the source code,
+        the transformation of this model to a GUI model, 
+        finally the generation of the target code from the GUI model. 
+
+
+    \bvc{explication des sous parties}
+    In the following, section \ref{sec:migrationProcess} first presents the migration process we developed using model-driven engineering,
+    section \ref{sec:metamodel} exposes the metamodel we designed to represent a GUI,
+    section \ref{sec:implementation} describes the implementation of the metamodel, 
+        how instantiate it and
+        explains the process to generate the target code from the metamodel.
+
+    \subsection{Migration Process}
+    \label{sec:migrationProcess}
+
+    \bv{TODO}
     
-    \subsection{Import}
+    \subsection{Metamodel}
+    \label{sec:metamodel}
+
+    In order to represent a GUI, we designed a metamodel presented Figure \ref{pic:guiModel}.
+
+    \pic{figures/GUIModel.png}{GUI Metamodel}{pic:guiModel}
+
+    Les applications de Berger-Levrault sont composées de Phases qui correspondent aux pages web auxquelles nous pouvons accéder.
+    Dans la Figure , la phase correspond à la partie encadrée en noir.
     
-    \subsection{Export}
+    Une phase ne contient pas l'ensemble du code correspondant à une page web,
+  mais contient des **Pages Métiers**.
+Les pages métiers sont identifiables dans le programme via les classes qui implémentent *IPageMetier*.
+Ce sont les pages métiers qui vont décrire une portion d'une page web.
+Dans la Figure , il n'y a qu'une page métier.
+Elle est encadrée en rouge.
+
+Certaines phases sont dites stand-alone.
+Cela signifie qu'elles ne contiennent pas de page métier et décrivent seules
+  la totalité des pages web auxquelles elles correspondent.
+
+Les phases stand-alone et pages métiers peuvent contenir des instances de **Widget**.
+Il s'agit des composants graphiques que l'on peut voir sur la page web (i.e. les boutons, les tableaux, les listes, etc.)
+  et des objets qui définissent le placement des composants sur une interface graphique (i.e. les panels).
+J'ai mis en évidence, en vert, certains widgets dans la Figure  (un tableau, un label, des liens).
+Tous les éléments graphiques de la page web présenté Figure  sont des widgets.
+Les widgets sont définis dans BLCore.
+
+
+Ces derniers peuvent avoir des **Actions**.
+A ce jour, j'ai travaillé sur deux types d'actions :
+
+- les **actions d'appels** qui correspondent au changement d'une page.
+  Par exemple le clic sur un lien hypertexte.
+- les **actions asynchrones** qui font une requête sur un **Service** distant.
+  Par exemple une liste qui se rempli après le chargement du site.
+
+Je n'ai pas encore pris en compte les actions qui visent à effectuer des changements sur la
+  page web courante.
+Par exemple, l'utilisateur est sur une page web qui contient un formulaire,
+  et en fonction des choix qu'ils effectuent (comme cocher ou non une boite à cocher) des éléments graphiques
+  doivent s'afficher.
+Ce sont les actions dites **actions complexes**.
+
+À partir de toutes ces informations, j'ai conçu un meta-modèle de l'application de Berger-Levrault.
+Comme on peut le voir Figure, on y retrouve les différents éléments composant une l'application.
+    
+    \subsection{Migration implementation}
+    \label{sec:implementation}
     
     % Free form, variable number of sections, technical details.
     
