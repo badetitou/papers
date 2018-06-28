@@ -83,7 +83,7 @@
     
     \begin{IEEEkeywords}
         Graphical User Interfaces, Industrial case study, Java, Angular, GWT, 
-        Migration, Model-Driven Engineering, MDE
+        Migration, Model-Driven Engineering
     \end{IEEEkeywords}
     
     
@@ -141,7 +141,11 @@
     % - Pour RAD \cite{sanchez2014model}, la complexité des interfaces de Berger-levrault fait que des éléments ne sont pas visible à l'écran
 
     \bvc{Présente solutions autour de la notre}
-    \bv{TODO}
+    Many works have been done around the migration of application.
+    There are three main research domain that are implied in this topic, 
+        the program transformation with work on defining rule of transformation \citep{rolim2017learning, brant2010extreme, newman2017simplifying}, 
+        the API mapping \citep{nguyen2014statistical, zhong2010mining, teyton2013automatic},
+        and the GUI reverse engineering with both static and dynamic analysis \citep{samir2007swing2script, shah2011reverse, joorabchi2012reverse}.
     
     
     % What our solution is \ct{Set} and \ct{OrderedCollection} (so that the reader knows where the paper is going)
@@ -372,10 +376,10 @@
     \subsection{Metamodel}
     \label{sec:metamodel}
 
-    In order to represent a GUI, we designed a metamodel presented Figure \ref{pic:guiModel}.
+    In order to represent a GUI, we designed a metamodel presented \figref{guiModel}.
     In the following, we present the different entities of the metamodel.
 
-    \pic{figures/GUIModel.png}{GUI Application Metamodel}{pic:guiModel}
+    \pic{figures/GUIModel.png}{GUI Application Metamodel}{fig:guiModel}
 
     The \textbf{Phase} represents the main container of a user interface page.
     It can be a \textit{Window} for Desktop application,
@@ -423,9 +427,49 @@
     In a web context, it can be the server side of the application.
     
     
-    \subsection{Migration implementation}
+    \subsection{Strategy implementation}
     \label{sec:implementation}
     
+    To test the strategy, we implemented a tool that follow the migration process.
+    The tool was implemented in Pharo and we have used the platform Moose.
+    Moose\footnote{\url{http://www.moosetechnology.org/}} is a platform for software and data analysis.
+
+    The \figref{codeImpl} presents the implementation logic.
+    The main bloc is \textit{BL-Model}.
+    This bloc contains the implementation of the GUI Metamodel.
+    On top of the model, there are 
+        an abstract exporter and one implementation of the exporter for Angular (\textit{BL-Model-Exporter} and \textit{BL-Model-Exporter-Angular},
+        an abstract importer and the specific code for Java (\textit{BL-Model-Importer} and \textit{BL-Model-Importer-Java}.
+    Because we test our solution on the system of Berger-Levrault,
+        we have also implemented the \textit{"CoreWeb"} extension,
+        whereas, the migration strategy does not depend on this extension.
+    Those packages extends the previous ones to have a fine-grained control of the migration
+        process.
+    This control is important to improve the final result.
+
+
+    \pic{figures/codeImpl.png}{Tool Implementation}{fig:codeImpl}
+
+
+    \subsubsection{Metamodel}
+    \label{sec:metamodel}
+
+    To implement the GUI metamodel (see \figref{guiModel}),
+        we used the last version of Famix \bv{Mettre ref} in Moose.
+    This tool is convenient because it provides a Metamodel Generator.
+    Defining the entities and their relations is simple.
+    In order to test the strategy on the application of Berger-Levrault,
+        we have created specific type of Widget for Berger-Levrault.
+    There are the specific Widget that Berger-Levrault used such as \textit{SplitButton}, \textit{RichTextArea}, \textit{Switch}, \etc.
+    This part does not belong to the original GUI model but, 
+        combined with the framework with created, it makes thing easier to extend and customize.
+
+    \subsubsection{Import}
+    \label{sec:import}
+
+    \subsubsection{Export}
+    \label{sec:export}
+
     % Free form, variable number of sections, technical details.
     
     % But in general do not mix solution and discussions/possible variation
