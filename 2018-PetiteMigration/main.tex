@@ -370,48 +370,46 @@
     \label{sec:metamodel}
 
     In order to represent a GUI, we designed a metamodel presented Figure \ref{pic:guiModel}.
+    In the following, we present the different entities of the metamodel.
 
     \pic{figures/GUIModel.png}{GUI Metamodel}{pic:guiModel}
 
-    Les applications de Berger-Levrault sont composées de Phases qui correspondent aux pages web auxquelles nous pouvons accéder.
-    Dans la Figure , la phase correspond à la partie encadrée en noir.
+    The \textbf{Phase} represents the main container of a user interface page.
+    It can be a \textit{Window} for Desktop application,
+        a web page or a tab in some specific case.
+    For example, 
+        if a web site is composed by only one web page, 
+        and this web page has multiple tab.
+    To represent the website as the content of the different tabs, 
+        the Phases will represent a tab.
+    A Phase can contains multiple Business Page.
+    It can also be called by any Widget with a \textit{Call Phase Action}.
+    When a Phase is called, the interface changes to display the phase.
+    In desktop application, the current Window interface changes from the previous Phase to 
+        the called one or a new Window with the interface owned by the called Phase is opened.
+    In web application, it can be a new web page, the changement of active tab, the transformation of the current web page. 
+
+    The \textbf{Widgets} are the different interface components and layout components.
+    There are two types of Widgets.
+    The \textbf{Leaf} is a widget which does not contain another widget such as some text in the interface. 
+    The \textbf{Containers} can contain other widget. 
+    It could be for organization purposed like separating widgets which belongs to a category and widgets which belongs to another category.
     
-    Une phase ne contient pas l'ensemble du code correspondant à une page web,
-  mais contient des **Pages Métiers**.
-Les pages métiers sont identifiables dans le programme via les classes qui implémentent *IPageMetier*.
-Ce sont les pages métiers qui vont décrire une portion d'une page web.
-Dans la Figure , il n'y a qu'une page métier.
-Elle est encadrée en rouge.
+    The \textbf{Business Pages} blabla \bv{Très BL specific... Il faudrait supprimer Page Métier}.
 
-Certaines phases sont dites stand-alone.
-Cela signifie qu'elles ne contiennent pas de page métier et décrivent seules
-  la totalité des pages web auxquelles elles correspondent.
+    The \textbf{Attribute} represents informations that belongs to a Widget and can change its visual aspect or its behavior.
+    The common attributes are the height and the width to define precisely the dimension of a widget.
+    There are also attributes to contains attributes such as the text contained by a widget. 
+    For example, a widget which represent a button can have an attribute \textit{text} to 
+        explicit the text of the button.
+    An attribute can change the behavior, it could be the case of an attribute \textit{enable}.
+    A button with the attribute \textit{enable} positioned at \textit{false} represent a button
+        we can not click.
+    \bv{Ajouter attribut de layout}
 
-Les phases stand-alone et pages métiers peuvent contenir des instances de **Widget**.
-Il s'agit des composants graphiques que l'on peut voir sur la page web (i.e. les boutons, les tableaux, les listes, etc.)
-  et des objets qui définissent le placement des composants sur une interface graphique (i.e. les panels).
-J'ai mis en évidence, en vert, certains widgets dans la Figure  (un tableau, un label, des liens).
-Tous les éléments graphiques de la page web présenté Figure  sont des widgets.
-Les widgets sont définis dans BLCore.
+    The \textbf{Action} blabla.
 
-
-Ces derniers peuvent avoir des **Actions**.
-A ce jour, j'ai travaillé sur deux types d'actions :
-
-- les **actions d'appels** qui correspondent au changement d'une page.
-  Par exemple le clic sur un lien hypertexte.
-- les **actions asynchrones** qui font une requête sur un **Service** distant.
-  Par exemple une liste qui se rempli après le chargement du site.
-
-Je n'ai pas encore pris en compte les actions qui visent à effectuer des changements sur la
-  page web courante.
-Par exemple, l'utilisateur est sur une page web qui contient un formulaire,
-  et en fonction des choix qu'ils effectuent (comme cocher ou non une boite à cocher) des éléments graphiques
-  doivent s'afficher.
-Ce sont les actions dites **actions complexes**.
-
-À partir de toutes ces informations, j'ai conçu un meta-modèle de l'application de Berger-Levrault.
-Comme on peut le voir Figure, on y retrouve les différents éléments composant une l'application.
+    
     
     \subsection{Migration implementation}
     \label{sec:implementation}
