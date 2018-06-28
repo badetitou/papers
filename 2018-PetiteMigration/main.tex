@@ -63,7 +63,7 @@
     % Our solution solves P in such and such way.
     
         In the context of the graphical application evolution, it happens that the application must switch of implementation language.
-        This evolution should be done by companies which want to stay\textit{Up-to-Date} with the latest technology.
+        This evolution should be done by companies which want to stay \textit{Up-to-Date} with the latest technology.
         It is also an important commercial argument to keep and attract clients.
         Berger-Levrault is a major IT company which owns the biggest GWT application in the world. 
         The company needs to switch the application implementation of its software from GWT to Angular.
@@ -139,6 +139,9 @@
     % Pourquoi on ne peut pas utiliser les autres papiers ( du point de vue leurs methodologies )
     % - Stratégie dynamique inexploitable au vue de la combinatoire induit par la taille application, et ne peut pas être mise chez les clients (trop lente) -- \cite{samir2007swing2script}
     % - Pour RAD \cite{sanchez2014model}, la complexité des interfaces de Berger-levrault fait que des éléments ne sont pas visible à l'écran
+
+    \bvc{Présente solutions autour de la notre}
+    \bv{TODO}
     
     
     % What our solution is \ct{Set} and \ct{OrderedCollection} (so that the reader knows where the paper is going)
@@ -372,7 +375,7 @@
     In order to represent a GUI, we designed a metamodel presented Figure \ref{pic:guiModel}.
     In the following, we present the different entities of the metamodel.
 
-    \pic{figures/GUIModel.png}{GUI Metamodel}{pic:guiModel}
+    \pic{figures/GUIModel.png}{GUI Application Metamodel}{pic:guiModel}
 
     The \textbf{Phase} represents the main container of a user interface page.
     It can be a \textit{Window} for Desktop application,
@@ -405,10 +408,19 @@
     An attribute can change the behavior, it could be the case of an attribute \textit{enable}.
     A button with the attribute \textit{enable} positioned at \textit{false} represent a button
         we can not click.
-    \bv{Ajouter attribut de layout}
+    Finally, the widgets can have an attribute that will impact the visual of the application.
+    This attribute defines the layout of its children and potentially its own dimension to respect the layout. 
 
-    The \textbf{Action} blabla.
+    The \textbf{Actions} are own by the Widgets.
+    They are actions that can be run in a Graphic Interface.
+    \textbf{Call Service} represents a call to a distant service such Internet.
+    \textbf{Fire PopUp} is the action that display a PopUp in the screen.
+    The PopUp can not be considered as a Widget, 
+        it is not present in the GUI, 
+        it only appears and disappears.
 
+    The \textbf{Service} is the reference to the distant feature the application can call from its GUI.
+    In a web context, it can be the server side of the application.
     
     
     \subsection{Migration implementation}
