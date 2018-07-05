@@ -78,37 +78,73 @@ So can represent the graphical user interface
 \label{sec:intro}
 
 % Contexte
-% - Entreprise internationale
-% - Logiciel de plus de X MLOC
-% - Nombre d'écran
-% - Année d'existence (RH +~ 10 ans)
-% - Nombre de dev
-% - GWT en perte de vitesse
+\bvc{Contexte} \bvc{use case}
+In the context of the analysis of an application.
+It happens that the developers want to create tools on top of his analysis.
+These tools could be useful in cases like:
+    analysis, tests generation, migration, \etc.
 
+\bvc{introduction model}
+A way to create those software is the usage of model of the source code of the application.
+The developers create or use a meta-model of the language of the application source code.
+Then they instantiate this meta-model from the application to analysed.
 
 % Problème
+\bvc{Problème}
+\bvc{intro gui}
+In the case of GUI application, it happens that the abstraction level doesn't provide enough information.
+Indeed, the generated model contains the methods, classes, \etc. of the source application,
+    but no information about how the GUI is shaped.
+The developers must do another analysis on the model to extract these information and so
+    making his tool.
 
+\bvc{intro simple gui decomposition}
+A solution to create tool specialized for GUI application is to create GUI model.
+A GUI application is divided into different elements.
+The aim of this paper is to define those components and meta-models
+    to represent all the specificities linked to a GUI application.
 
 % Known tracks for \sd{solutions} here you want to show that you are not an idiot not knowing what have been around
-
+\bvc{Know tracks}
+We did not find any other papers which defines a solution to represent graphical application.
+Nevertheless, the KDM model designed by the OMG proposed a \textit{Resource Layer} which can used to define an GUI application.
+Their solution is discussed section X.
 
 % What our solution is \ct{Set} and \ct{OrderedCollection} (so that the reader knows where the paper is going)
-% - Un outil réutilisable
-% - Migrer l'ensemble du code lié à l'interface Graphique (sans code métier) -> Mesurable
-% - Recherche de correspondance entre ancien et nouveau framework (GWT to HTML/PrimeNG)
+\bvc{What is our solution}
+We defined four meta-models to represent the GUI software.
+The meta-models represent the different main GUI's specificities we extracted from our analysis
+    and other research papers.
 
 % Contribution of the paper
+\bvc{Contrib of the paper}
+The main contributions of our work are: 
 
+\begin{itemize}
+    
+    \item Description of GUI application structure
+
+    \item Meta-Models to represent a GUI application
+
+    \item Discussion about GUI Meta-Models
+
+\end{itemize}
 
 % Paper structure
+\bvc{Paper structure}
+In Section~\ref{sec:guiAppDiv}, we present the different GUI elements. 
+Then, in Section~\ref{sec:solutions}, we describe the solution we've proposed.
+Section~\ref{sec:contribution} exposes our solution.
+Finally, we conclude in Section~~\ref{sec:conclusion}.
 
 
-\section{Problem Description}
-\label{sec:problem}
+
+\section{GUI application structure}
+\label{sec:guiAppDiv}
 
 
-\section{Migration Solution}
-\label{sec:Solution}
+\section{Existing solutions}
+\label{sec:solutions}
 
 % Context, exposed with the \textbf{most precise terms possible} (don't open
 % unwanted doors for the reader)
@@ -126,7 +162,7 @@ So can represent the graphical user interface
 % Factual solution tracks, to position...
 % Our solution in a nutshell.
 
-\section{Proposed Solution}
+\section{Proposed meta-models}
 \label{sec:contribution}
 
 % Free form, variable number of sections, technical details.
