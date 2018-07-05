@@ -20,33 +20,19 @@
 \usepackage{xspace}
 
 
+% natbib
+\usepackage[numbers]{natbib}
+\input{macros}
+
+
 \author{
-    \IEEEauthorblockN{Beno\^{i}t Verhaeghe, Anne Etien, \\ Nicolas Anquetil, St\'{e}phane Ducasse}\IEEEauthorblockA{Universit\'{e} de Lille, CNRS, Inria, \\ Centrale Lille, UMR 9189 -- CRIStAL, France\\}
+    \IEEEauthorblockN{Beno\^{i}t Verhaeghe$^{1,2}$, Anne Etien$^1$,\\ Nicolas Anquetil$^1$, St\'{e}phane Ducasse$^1$}\IEEEauthorblockA{$^1$Universit\'{e} de Lille, CNRS, Inria, \\ Centrale Lille, UMR 9189 -- CRIStAL, France\\}
     \and
-    \IEEEauthorblockN{Abderrahmane Seriai, Laurent Deruelle}\IEEEauthorblockA{Berger-Levrault, France}     
+    \IEEEauthorblockN{Abderrahmane Seriai$^2$, Laurent Deruelle$^2$,\\ Mustapha Derras$^2$}\IEEEauthorblockA{$^2$Berger-Levrault, France}     
 }
 
 \begin{document}
-\title{How to migrate GUI interface?}
-
-% Planning the review
-% - Need for a review 
-% - Commissioning a review
-% - Specifying the research Question
-% - Developing a review protocol
-% - Evaluating the review protocol
-%
-% Conducting the review
-% - Identification of research
-% - Primary studies
-% - Study quality assessment
-% - Data extraction and monitoring
-% - Data synthesis
-%
-% Reporting the review
-% - Specifying dissemination mechanisms
-% - Formatting the main report
-% - Evaluating the report
+\title{GUI application meta-models}
 
 
 \date{\today}
@@ -56,18 +42,37 @@
 
 \begin{abstract}
 
-% In this context...
-% We consider this problem P...
-% P is a problem because...
-% We propose this solution...
-% Our solution solves P in such and such way.
+\bvc{In this context...}
+When a developer wants to analyse an application,
+    and this application includes an user interface.
+He could want an abstraction of the application.
+Often, this abstraction level correspond to models, and their meta-models, of
+    the piece of software.
+\bvc{We consider this problem P...}
+There are indeed many elements to represent and to link.
+\bvc{P is a problem because...}
+Currently there are many meta-models of GUI application
+    that can be used to represent the interface
+    and some links between the different windows.
+But none of them express complex behavior, such as loop or condition,
+    nor data structure information.
+\bvc{We propose this solution...} 
+We defined four meta-models.
+The first one represent the Graphical User Interface,
+    the second one the layout to apply to the GUI, 
+    the third one the data structure implies in the GUI, 
+    the last one the behavior associate to an event fired by an element of the GUI. 
+\bvc{Our solution solves P in such and such way.}
+Our meta-models can express the different elements of a GUI application.
+So can represent the graphical user interface
+    and the logic of the application.
 
-Avec l'évolution des solutions vers le web, de plus en plus d'entreprise souhaite migrer leurs application \textit{desktop} vers 
-    des application \textit{web}.
-De manière plus générale
    
 \end{abstract}
 
+\begin{IEEEkeywords}
+    Graphical User Interfaces, Model-Driven Engineering
+\end{IEEEkeywords}
 
 \section{Introduction}
 \label{sec:intro}
@@ -101,66 +106,9 @@ De manière plus générale
 \section{Problem Description}
 \label{sec:problem}
 
-Nous avons trouvé plusieurs technique pour effectuer la migration. 
-
-\begin{itemize}
-
-    \item \textit{Manuellement}. Une petite description ici
-
-    \item \textit{Rule engine}. Une petite description ici
-
-    \item \textit{Through Model}. Une petite description ici
-
-\end{itemize}
-
-Pour chaque cas que nous avons trouvé, nous avons défini les critères suivants : 
-
-\begin{itemize}
-
-    \item \textit{Lisibility}. Description
-
-    \item \textit{Compilable}. Description
-
-    \item \textit{Conservation architecture source}.
-
-    \item \textit{Respect architecture cible}.
-
-    \item \textit{Couverture}.
-
-    \item \textit{Source et cible indépendance}.
-
-    \item \textit{Modulaire}.
-
-    \item \textit{Automatique}.
-
-    \item \textit{Amélioration du code source}.
-
-    \item \textit{Préservation de l'aspect}.
-
-\end{itemize}
-
 
 \section{Migration Solution}
 \label{sec:Solution}
-
-\subsection{Manuellement}
-\label{sec:Manually}
-
-\subsection{Rule Engine}
-\label{sec:ruleEngine}
-
-\subsection*{Normalisation}
-
-\subsection{Through Model}
-\label{sec:throughModel}
-
-\subsection*{Dynamic}
-
-- Crawling 
-
-- ? 
-
-\subsection*{Static}
 
 % Context, exposed with the \textbf{most precise terms possible} (don't open
 % unwanted doors for the reader)
@@ -200,7 +148,9 @@ Pour chaque cas que nous avons trouvé, nous avons défini les critères suivant
 \subsection*{Acknowledgements} 
 This work was supported by Ministry of Higher Education and Research, Nord-Pas de Calais Regional Council, CPER Nord-Pas de Calais/FEDER DATA Advanced data science and technologies 2015-2020.
 
-\bibliographystyle{abbrv}
-% \bibliography{references}
+%\bibliographystyle{abbrv}
+%natbib 
+\bibliographystyle{myplainnat}
+%\bibliography{references}
 
 \end{document}
