@@ -32,7 +32,7 @@
 }
 
 \begin{document}
-\title{GUI application meta-models}
+\title{GUI application meta-models\\ State of the Art}
 
 
 \date{\today}
@@ -138,7 +138,6 @@ Section~\ref{sec:contribution} exposes our solution.
 Finally, we conclude in Section~~\ref{sec:conclusion}.
 
 
-
 \section{GUI application structure}
 \label{sec:guiAppDiv}
 
@@ -179,7 +178,22 @@ Finally, we conclude in Section~~\ref{sec:conclusion}.
 % constraints. We proposed solution S. It has such good points and such not so
 % good ones. Now we could do this or that.
 
- 
+In this paper, we defined four meta-models to represent a GUI applications.
+
+The \textbf{GUI model} represents the different \textit{pages} of the applications and their contents.
+It includes the properties of the widgets and the link from the widgets and their events.
+
+The \textbf{layout model} expresses the positioning relation between the widgets of the GUI models.
+
+The \textbf{behavior model} defines the behavior to execute when
+    an event is fired.
+The events are fired by using an action on a widget of the GUI model or
+    automatically by the application.
+
+The \textbf{data model} includes information about the data manipulated
+    by the GUI application.
+Those data can be used by the behavior model and transmit to the
+    GUI model.
 
 \subsection*{Acknowledgements} 
 This work was supported by Ministry of Higher Education and Research, Nord-Pas de Calais Regional Council, CPER Nord-Pas de Calais/FEDER DATA Advanced data science and technologies 2015-2020.
