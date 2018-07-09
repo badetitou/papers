@@ -32,13 +32,11 @@
 }
 
 \begin{document}
-\title{GUI application meta-models\\ State of the Art}
+\title{GUI application meta-models:\\ a state of the art}
 
 
 \date{\today}
 \maketitle
-
-
 
 \begin{abstract}
 
@@ -132,15 +130,21 @@ The main contributions of our work are:
 
 % Paper structure
 \bvc{Paper structure}
-In Section~\ref{sec:guiAppDiv}, we present the different GUI elements. 
-Then, in Section~\ref{sec:solutions}, we describe the solution we've proposed.
+In Section~\ref{sec:guiAppDiv}, we present the different GUI elements
 Section~\ref{sec:contribution} exposes our solution.
+Then, In Section~\ref{sec:solutions}, we describe and categorized the solution proposed 
+    by others authors.
 Finally, we conclude in Section~~\ref{sec:conclusion}.
-
 
 \section{GUI application structure}
 \label{sec:guiAppDiv}
 
+\section{Proposed meta-models}
+\label{sec:contribution}
+
+
+\subsection{Model View Controller}
+\label{sec:mvc}
 
 \section{Existing solutions}
 \label{sec:solutions}
@@ -148,27 +152,61 @@ Finally, we conclude in Section~~\ref{sec:conclusion}.
 % Context, exposed with the \textbf{most precise terms possible} (don't open
 % unwanted doors for the reader)
 
+\bvc{intro expliquand ce que l'on va faire (analyse des modèles)}
+Many authors have tried to represent a GUI application.
+They created meta-models that define the entities
+    they need for their analysis.
+Those models help us define meta-models to represent any GUI applications.
+We analysed and grouped the meta-models of 14 relevant papers in the
+    GUI application representation field.
+ 
+\subsection{GUI}
+\label{sec:gui}
 
-% Probably set the vocabulary before to cut any misinterpretation
+\begin{table}[hbtp]
+\caption{GUI elements}
+\label{tab:guiElements}
+\begin{center}
+%\resizebox{\columnwidth}{!}{%
+    \begin{tabular}{|c|c|}
+        \hline
+        SubWidgets & \citep{gotti2016java,sanchez2014model, memon2007eventflow} \\
+        \hline
+        Events & \citep{gotti2016java, fleurey2007model, morgado2011reverse, garces2017white, memon2007eventflow, samir2007swing2script, joorabchi2012reverse,  amalfitano2012using, silva2010guisurfer} \\
+        \hline
+        Properties & \citep{gotti2016java, sanchez2014model, morgado2011reverse, garces2017white, memon2007eventflow, samir2007swing2script, shah2011reverse, joorabchi2012reverse, MemonWCRE2003, mesbah2012crawling, amalfitano2012using, silva2010guisurfer} \\
+        \hline
+    \end{tabular} %
+%}
+\end{center}
+\end{table}
 
-% Constraints that influenced the solution (because the solution is not
-% universal) \emph{e.g.} our requirements for a solution, possibly not all
-% satisfied. They should be sound and believable. Analysis of the criteria.
-% Imagine that you are another guy having this problem do the constraint
-% matches yours so that you could apply the solution
+\bvc{presenter en quelques lignes tout les modèles proposés}
+\citet{gotti2016java} proposed a meta-model inspired by KDM model (see section \ref{sec:kdm}).
 
 
-% Factual solution tracks, to position...
-% Our solution in a nutshell.
+\subsection{Navigation}
+\label{sec:navigation}
 
-\section{Proposed meta-models}
-\label{sec:contribution}
+\subsection{State flow}
+\label{sec:state}
 
-% Free form, variable number of sections, technical details.
+\subsection{Layout}
+\label{sec:layout}
 
-% But in general do not mix solution and discussions/possible variation
-% let that for discussion
 
+\subsection{KDM}
+\label{sec:kdm}
+
+
+\section{Discussion}
+\label{sec:discussion}
+
+\bvc{Critères d'évaluation 
+    \begin{itemize} 
+        \item Certains auteurs n'ont pas présenté le schema mais l'on seulement décrit
+    \end{itemize}
+}
 
 
 \section{Conclusion}
@@ -201,6 +239,6 @@ This work was supported by Ministry of Higher Education and Research, Nord-Pas d
 %\bibliographystyle{abbrv}
 %natbib 
 \bibliographystyle{myplainnat}
-%\bibliography{references}
+\bibliography{references}
 
 \end{document}
