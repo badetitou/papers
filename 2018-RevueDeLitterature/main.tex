@@ -90,7 +90,7 @@ Then they instantiate this meta-model from the application to analysed.
 % Problème
 \bvc{Problème}
 \bvc{intro gui}
-In the case of GUI application, it happens that the abstraction level doesn't provide enough information.
+In the case of GUI application, it happens that the abstraction level does not provide enough information.
 Indeed, the generated model contains the methods, classes, \etc. of the source application,
     but no information about how the GUI is shaped.
 The developers must do another analysis on the model to extract these information and so
@@ -139,8 +139,155 @@ Finally, we conclude in Section~~\ref{sec:conclusion}.
 \section{GUI application structure}
 \label{sec:guiAppDiv}
 
+The first step to create the meta-models of a graphic application
+    is to define the elements we need to represent.
+We divided the UI into the following three parts:
+
+\begin{itemize}
+    \item The user interface
+    \item The business code
+    \item The behavior code 
+\end{itemize}
+
+\subsection{User Interface}
+\label{sec:userInterface}
+
+The user interface is the viewable part.
+This element represents the interface of the application.
+It includes the components of the interface.
+The User Interface does not contain the exact visualisation of a component.
+But it can precise some feature inherent to the component, like the ability to be clicked,
+    or some properties of the component, like its color or size.
+More than the components, it also includes the disposition
+    of those components in relation to the others.
+In the case a application is composed by multiple windows (or web pages for web application),
+    the user interface contains all the windows.
+
+\subsection{Behavior Code}
+\label{sec:behaviorCode}
+
+The behavior code is the \textit{executable} part of the application.
+It corresponds to the logic of the application.
+It can have two manifestations of the business code.
+It can be run either by an user action on an interface component (like a click)
+    or by the system itself.
+As a programming language, the business code contains control structures
+    (\ie loop and alternative).
+Linked to the user interface, the business code defined the logic of the user interface.
+However, the business code does not express the logic of the application.
+This part is dedicated to the business code. 
+
+\subsection{Business Code}
+\label{sec:businessCode}
+
+The business code defines specific information of an application.
+It is composed by the general rules of the application
+    (how calculate the taxes?),
+    the distant services link (which server my business code should request),
+    the data of the application (which database? which kind of \textit{object}?).
+So the business code is not directly linked to the user interface. 
+
 \section{Proposed meta-models}
 \label{sec:contribution}
+
+From the decomposition of the GUI application structure (see Section~\ref{sec:guiAppDiv}),
+    we decided to create four meta-models.
+
+\begin{itemize}
+    \item The GUI model
+    \item The layout model
+    \item The business model
+    \item The behavior model
+\end{itemize}
+
+
+\subsection{The GUI model}
+\label{sec:guiModel}
+
+In order to represent a GUI, we designed a meta-model presented \figref{guiModel}.
+This GUI model is the first part of the user interface component of
+    a graphic application as defined Section~\ref{sec:userInterface}
+In the following, we present the different entities of the meta-model.
+
+\pic{figures/GUIModel.png}{GUI Application Metamodel}{fig:guiModel}
+
+
+The \textbf{Phase} represents the main container of a user interface page.
+It can be a \textit{Window} for Desktop application,
+    a web page or a tab in some specific case.
+For example, 
+    if a web site is composed by only one web page, 
+    and this web page has multiple tab.
+To represent the website as the content of the different tabs, 
+    the Phases will represent a tab.
+A Phase can contains multiple Business Page.
+It can also be called by any Widget with a \textit{Call Phase Action}.
+When a Phase is called, the interface changes to display the phase.
+In desktop application, the current Window interface changes from the previous Phase to 
+    the called one or a new Window with the interface owned by the called Phase is opened.
+In web application, it can be a new web page, the changement of active tab, the transformation of the current web page. 
+
+The \textbf{Widgets} are the different interface components and layout components.
+There are two types of Widgets.
+The \textbf{Leaf} is a widget which does not contain another widget such as some text in the interface. 
+The \textbf{Containers} can contain other widget. 
+It could be for organization purposed like separating widgets which belongs to a category and widgets which belongs to another category.
+
+The \textbf{Business Pages} blabla \bv{Très BL specific... Il faudrait supprimer Page Métier}.
+
+The \textbf{Attribute} represents informations that belongs to a Widget and can change its visual aspect or its behavior.
+The common attributes are the height and the width to define precisely the dimension of a widget.
+There are also attributes to contains attributes such as the text contained by a widget. 
+For example, a widget which represent a button can have an attribute \textit{text} to 
+    explicit the text of the button.
+An attribute can change the behavior, it could be the case of an attribute \textit{enable}.
+A button with the attribute \textit{enable} positioned at \textit{false} represent a button
+    we can not click.
+
+The \textbf{Actions} are own by the Widgets.
+They are actions that can be run in a Graphic Interface.
+
+\bv{Should disapear and be splitted between Business and behavior model}
+\textbf{Call Service} represents a call to a distant service such Internet.
+\textbf{Fire PopUp} is the action that display a PopUp in the screen.
+The PopUp can not be considered as a Widget, 
+    it is not present in the GUI, 
+    it only appears and disappears.
+
+\bv{SHOUDL Disapear and go to the Behavior Model}The \textbf{Service} is the reference to the distant feature the application can call from its GUI.
+In a web context, it can be the server side of the application.
+
+\subsection{The layout model}
+\label{sec:layoutModel}
+
+\bv{Ajouter un layout model}
+
+The layout model is the second part of the user interface defined Section~\ref{sec:userInterface}.
+It contains the information concerning the visual disposition of the elements of the user interface.
+It does not include properties as color or text size of an element.
+The aim of the layout model is to explicit the layout applied by a \textit{container widget}.
+It exists some common layout as \textbf{HorizontalLayout}, \textbf{VerticalLayout} or \textbf{GridLayout}.
+Each widget can only have one layout,
+    but because a \textit{container} can contain another \textit{container},
+    it is possible to define complex layout composition.
+
+
+
+\subsection{The behavior model}
+\label{sec:behaviorModel}
+    
+% \pic{figures/BehaviorModel.png}{Behavior Metamodel}{fig:behaviorModel}
+
+\begin{figure}
+    \includegraphics[width=\linewidth]{figures/BehaviorModel.png}
+    \caption{Behavior Metamodel}
+    \label{fig:behaviorModel}
+\end{figure}
+
+
+
+\subsection{The business model}
+\label{sec:businessModel}  
 
 
 \subsection{Model View Controller}
@@ -156,7 +303,7 @@ Finally, we conclude in Section~~\ref{sec:conclusion}.
 Many authors have tried to represent a GUI application.
 They created meta-models that define the entities
     they need for their analysis.
-Those models help us define meta-models to represent any GUI applications.
+Those models helped us to define meta-models to represent any GUI applications.
 We analysed and grouped the meta-models of 14 relevant papers in the
     GUI application representation field.
  
@@ -182,7 +329,7 @@ We analysed and grouped the meta-models of 14 relevant papers in the
 \end{table}
 
 \bvc{presenter en quelques lignes tout les modèles proposés}
-\citet{gotti2016java} proposed a meta-model inspired by KDM model (see section \ref{sec:kdm}).
+\citet{gotti2016java} proposed a meta-model inspired by KDM model (see Section~\ref{sec:kdm}).
 
 
 \subsection{Navigation}
@@ -228,7 +375,7 @@ The \textbf{behavior model} defines the behavior to execute when
 The events are fired by using an action on a widget of the GUI model or
     automatically by the application.
 
-The \textbf{data model} includes information about the data manipulated
+The \textbf{business model} includes information about the data manipulated
     by the GUI application.
 Those data can be used by the behavior model and transmit to the
     GUI model.
