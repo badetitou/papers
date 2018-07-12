@@ -454,6 +454,31 @@ Those elements are our definition of a widget without the container pattern.
 For each UI element, the authors' tool are able to handle the detection
     of multiple attributes and of the event linked to the element.
 
+\citet{memon2007eventflow} used a GUI Model to represent the state of an application (see \ref{sec:state}).
+As us, they have a widget with properties.
+The author made the difference between \textit{widget} and \textit{container},
+    it is similar to the use of the container pattern we use.
+With the notion of \textit{container}, the author is able to represent a DOM.
+
+\citet{mesbah2012crawling} did not present directly the user interface meta-model they used.
+However, they explain that they use a DOM-tree representation to
+    analyse different web page.
+They also use the notion of event that can be fired.
+They use different instances of their UI meta-model to represent the different web page of the application.
+Those instances can be compared to our Phase entities.
+
+\citet{amalfitano2012using} designed an Android Application GUI which is similar to ours meta-model.
+They have a notion of interface which is similar to our phase.
+An interface contains widgets.
+The widgets have properties and event right like in our model.
+Their event are parameterizable, this notion is in our behavior model.
+They do not use a container pattern to represent the DOM.
+
+Finally, \citet{silva2010guisurfer} used a GUI meta-model but did not present it
+    in them paper.
+However, they explain that they use a GUI AST to detect the fragment that represents the user interface.
+We can linked this GUI AST to the container pattern we used in our GUI model.
+
 \subsection{Navigation}
 \label{sec:navigation}
 
