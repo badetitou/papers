@@ -17,7 +17,7 @@
 \usepackage{enumerate}
 \usepackage{cite}
 \usepackage[pdftex,colorlinks=true,pdfstartview=FitV,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
-\usepackage{xspace}
+\usepackage{multirow}
 
 
 % natbib
@@ -284,14 +284,65 @@ Each widget can only have one layout,
     \label{fig:behaviorModel}
 \end{figure}
 
+The behavior model presented \figref{behaviorModel} is the owner of
+    the behavior code.
+There are two main elements, ths statement and the expression.
+
+The \textbf{Statement} is the representation of the control structures of
+    a programming language.
+There are the alternative, the loop, the notion of block and a link to an expression.
+
+The \textbf{Expression} represents a piece of code that can be valued directly.
+So it can be an assignment with the value of the assignment,
+    a literal (\ie directly the value of the written element),
+    a boolean expression, 
+    an arithmetic expression
+    or an invocation.
+In the case of an invocation, it is the return value of the called method that
+    is used as the value of the expression.
+
+The \textbf{Behavior} elements is the link to the GUI model.
+It is the container of the logic of an event fired by an action.
+
+Thanks to this model, we are able to represent the logic to execute once an user
+    fire an event from an action on a widget of the GUI model.
+
 
 
 \subsection{The business model}
 \label{sec:businessModel}  
 
+\bv{Ajouter un business model}
+The business model contains two main composites of the application.
+The data and the information about the distant services.
 
 \subsection{Model View Controller}
 \label{sec:mvc}
+
+We made a comparaison between our proposed models and the MVC pattern.
+The \tabref{mvcMatching} present the matching between the models.
+
+\begin{table}[hbtp]
+    \caption{Linked between ours model and the MVC pattern}
+    \label{tab:mvcMatching}
+    \begin {center}
+%    \resizebox{\columnwidth}{!}{%
+    \begin{tabular}{|l|l|}
+        \hline
+         MVC & Ours Models \\
+        \hline
+        Model & Business \\
+        \hline
+        \multirow{2}*{View} & Layout \\
+        \cline{2-2}
+         & GUI \\
+        \hline
+        Controler & Behavior \\
+        \hline
+    \end{tabular} %
+ %   }
+    \end{center}
+    \end{table}
 
 \section{Existing solutions}
 \label{sec:solutions}
@@ -330,7 +381,59 @@ We analysed and grouped the meta-models of 14 relevant papers in the
 
 \bvc{presenter en quelques lignes tout les modèles proposés}
 \citet{gotti2016java} proposed a meta-model inspired by KDM model (see Section~\ref{sec:kdm}).
+The model has the main entities we also defined.
+There is the composite pattern to represent the DOM of a graphic interface.
+Their widget are called \textit{Component} and as us they have properties.
+They also implemented an event property for the widget. 
+But they inverse the name \textit{event} and \textit{action} compare to our solution.
 
+\citet{fleurey2007model} did not show the GUI meta-model directly but
+    we extracted information from their navigation model (see \ref{sec:navigation}).
+They have, at least, two elements in their GUI model that represent a \textit{Window}
+    and a \textit{GraphicElement}.
+The Window seems to correspond to our phase entity.
+And because the \textit{GraphicElement} and the \textit{Window} are not linked,
+    we can supposed that the \textit{GraphicElement} is a widget.
+The \textit{GraphicElement} has an \textit{Event}.
+We do not have the totality of the GUI meta-model,
+    but we can see that it is next to our.
+
+The GUI meta-model of \citet{sanchez2014model} is simple 
+    and very similar to our.
+It has the entities Widget and Window which correspond respectively to
+    our Widget and Phase.
+Their Widget has their x and y position and their width and height as properties.
+It is similar to the link between Widget and Attribute in our meta-model.
+There is also the composite pattern to represent the DOM.
+
+\citet{morgado2011reverse} used a GUI meta-model but do not describe it.
+We only know that the GUI is represented as a tree which is similar to
+    the DOM and can be represented thank to the composite pattern.
+
+The GUI meta-model of \citet{garces2017white} differs a lot from our.
+There are the attributes, the events, the screen (which is like a Phase)
+    but there is not widget.
+This absent is explained by the difference of source technology.
+The authors worked on a project that used oracle forms.
+This technology is used to create simple interface with only
+    textfield or form.
+The textfield contains data from a database.
+The disposition of the elements is also really simple in the example provides
+    by the authors because the textfield or form are displayed each below each other.
+We still can notice that they use an event entity to represent the action of the user with the
+    user interface.
+
+\citet{MemonWCRE2003} represents a GUI user interface with only two entities in their GUI meta-model.
+A GUI window, which is similar to our Phase, is constituted by a set of widget.
+Those widgets can have properties and all the properties have a value associate.
+They do not have a representation of the DOM because it was not in the scope of
+    their work.
+The authors defined a user interface as the set of widget and their properties,
+    so, if a widget can two different values during the execution of the program, 
+    it belongs to two different user interfaces.
+This point is the major difference with the meta-models we proposed because,
+    in our design if the value of a property change, we still be in the same user interface
+    but a behavioral code has been executed.
 
 \subsection{Navigation}
 \label{sec:navigation}
