@@ -435,6 +435,25 @@ This point is the major difference with the meta-models we proposed because,
     in our design if the value of a property change, we still be in the same user interface
     but a behavioral code has been executed.
 
+\citet{samir2007swing2script} worked on the migration of Java-Swing application to Ajax Web application.
+They created a meta-model to represent the UI of the original application.
+This meta-model is stored in a XUL file and represents
+    the widgets with their properties and the layout.
+Those widgets belongs to a Window, which is called Phase in our work, and
+    can fire event when a GUI input is executed.
+In our work, we have the same system for the event but the Input is hidden under the concept of Action.
+
+\citet{shah2011reverse} used a a tree architecture to represent the GUI.
+The root of the tree is a \textit{Frame}.
+It corresponds to our Phase.
+The root contains components with their properties.
+The component entity is similar to our Widget entity.
+
+\citet{joorabchi2012reverse} represent an user interface with a set of UI element.
+Those elements are our definition of a widget without the container pattern.
+For each UI element, the authors' tool are able to handle the detection
+    of multiple attributes and of the event linked to the element.
+
 \subsection{Navigation}
 \label{sec:navigation}
 
