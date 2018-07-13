@@ -482,12 +482,56 @@ We can linked this GUI AST to the container pattern we used in our GUI model.
 \subsection{Navigation}
 \label{sec:navigation}
 
+\citet{fleurey2007model} created a navigation meta-model to represent the
+    transition between the different user interfaces or the forms to complete by the user.
+The model is also linked to an entity called \textit{Operation} but not well described.
+It still seems to be a way to call specific code to execute.
+The navigation meta-model proposed by the authors is similar to our behavior model.
+
+\citet{morgado2011reverse} designed two meta-models for the navigation.
+The first one is the windows model.
+It contains all the window available in the application.
+For each window, it describes the other window that can be reach from the original one.
+This describes the navigation between the window in an application.
+The second one is the navigation model.
+More than the link between the windows,
+    this meta-model stores the user action to performed in order to execute the navigation.
+All this information are include in our behavior meta-model.
+
 \subsection{State flow}
 \label{sec:state}
 
 \subsection{Layout}
 \label{sec:layout}
 
+\citet{gotti2016java} used a layout meta-model to represent
+    the position of the element in the user interface.
+The authors have chosen the meta-model designed by KDM.
+We described the meta-model \secref{kdm}.
+
+\citet{sanchez2014model} designed three layouts meta-models.
+The authors made this hight level of decomposition because their case study.
+The case study was the reverse engineering of a graphic application developed
+    with Rapid Application Development (RAD).
+The RAD often implies the non-usage of \textit{common layout}.
+So, the authors had to find a way to extract the position of the ui element
+    without using \textit{HorizontalLayout}, \textit{VerticalLayout}, \etc, but
+    finally representing the application with those layout.
+\bv{To recheck}
+The first model they designed is the Region model.
+The Region model defines squares in the user interface that match the widgets of the interface
+    and precises the sub-region.
+This model is a way to recreate the composite pattern of our GUI model.
+The second model is the Tile model.
+This model positioned the different regions with others.
+If a region is inside another, it precises the position of the sub-region (top, middle, bottom, left, right, centre).
+The tile model groups also the spatially close region and precises the relation between them (horizontally or vertically align).
+Finally the CUI model generates layout for the UI elements from the Tile model.
+It exists three kind of layout, the FlowLayout, the StackLayout, the GridLayout and the BorderLayout.
+The last idea of associating a layout to a ui element is similar to the notion of layout we linked to a widget.
+
+
+\citet{samir2007swing2script}.
 
 \subsection{KDM}
 \label{sec:kdm}
