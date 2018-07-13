@@ -501,6 +501,54 @@ All this information are include in our behavior meta-model.
 \subsection{State flow}
 \label{sec:state}
 
+In order to represent the events, 
+    \citet{memon2007eventflow} used the notion of state.
+A state represent the state of all the widget.
+Once an event is performed,
+    if the state of a widget changes, a new state is created.
+The state of a widget depends to its properties and its visibility.
+This notion of changement of the user interface is similar to a navigation link.
+It is include in our behavior meta-model.
+
+\citet{joorabchi2012reverse} used the states to detect the impact
+    of an event on the user interface.
+They detect two different states of the application by applying an image-comparaison.
+During the comparaison they ignoring some difference as the text inside a textfield.
+The usage of the state can here be compared to a navigation meta-model,
+    which are representing in our behavior meta-model.
+
+\citet{mesbah2012crawling} used the notion of state to represent the multiple
+    visual an application can have.
+They execute the different actions possible on the widgets and analyse if the state of the application change.
+A changement in the application happen if at least the property of one widget change or if a widget is added or removed of the interface.
+The authors used the state as a representation of a navigation meta-model.
+The navigation meta-model is completely represented in our behavior meta-model.
+
+\citet{amalfitano2012using} worked on GUI ripping of Android application.
+In this case, they represented the user interfaces with a GUI model and the link
+    between them thanks to a state flow graph.
+Those flow graph contains the information about the different visuals of the application and how to reach
+    a visual from another.
+This link come from a possible performed action from a user of the analysed application.
+It is similar to the navigation meta-model.
+This navigation links are represented in our work in the behavior meta-model.
+
+\citet{silva2010guisurfer} used a directed graph to represent the navigation link between different state of an application.
+A state is the result of an action on a window when some condition are followed.
+It is composed by the internal state of the window which means the state of all the component of the window.
+Once a component property changes the state of the application changes.
+This behavior is represented in our behavior meta-model.
+
+\citet{aho2013industrial} worked on extraction GUI of an application.
+In order to represent the different interface that can be reach
+    by using the piece of software, 
+    the authors used a finite-state machine.
+Each node correspond to a GUI interface and each edge a link between two windows.
+In this way, they can represent the navigation link inherent to the analysed application.
+The navigation linked proposed by the authors could be represented
+    by a navigation meta-model.
+This last is completely included in our behavior meta-model.
+
 \subsection{Layout}
 \label{sec:layout}
 
