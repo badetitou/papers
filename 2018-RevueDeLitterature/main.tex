@@ -42,7 +42,7 @@
 
 \bvc{In this context...}
 When a developer wants to analyse an application,
-    and this application includes an user interface.
+    and this application includes a user interface.
 He could want an abstraction of the application.
 Often, this abstraction level correspond to models, and their meta-models, of
     the piece of software.
@@ -209,7 +209,7 @@ This GUI model is the first part of the user interface component of
     a graphic application as defined Section~\ref{sec:userInterface}
 In the following, we present the different entities of the meta-model.
 
-\pic{figures/GUIModel.png}{GUI Application Metamodel}{fig:guiModel}
+\picw{figures/GUIModel.png}{GUI Application Metamodel}{fig:guiModel}
 
 
 The \textbf{Phase} represents the main container of a user interface page.
@@ -276,13 +276,7 @@ Each widget can only have one layout,
 \subsection{The behavior model}
 \label{sec:behaviorModel}
     
-% \pic{figures/BehaviorModel.png}{Behavior Metamodel}{fig:behaviorModel}
-
-\begin{figure}
-    \includegraphics[width=\linewidth]{figures/BehaviorModel.png}
-    \caption{Behavior Metamodel}
-    \label{fig:behaviorModel}
-\end{figure}
+\picw{figures/BehaviorModel.png}{Behavior Metamodel}{fig:behaviorModel}
 
 The behavior model presented \figref{behaviorModel} is the owner of
     the behavior code.
@@ -449,7 +443,7 @@ It corresponds to our Phase.
 The root contains components with their properties.
 The component entity is similar to our Widget entity.
 
-\citet{joorabchi2012reverse} represent an user interface with a set of UI element.
+\citet{joorabchi2012reverse} represent a user interface with a set of UI element.
 Those elements are our definition of a widget without the container pattern.
 For each UI element, the authors' tool are able to handle the detection
     of multiple attributes and of the event linked to the element.
@@ -586,7 +580,88 @@ But they precise they use the XUL format as they did for the GUI description \se
 \subsection{KDM}
 \label{sec:kdm}
 
-\section{Reverse engineering techniques}
+\picw{figures/kdm.png}{KDM Architecture}{fig:kdm}
+
+The OMG (\url{https://www.omg.org/spec/KDM/}) defined KDM\footnote{KDM: Knowledge Discovery Metamodel} standard to support the evolution of software.
+The standard is a meta-model to represent a piece of software in a high level of abstraction.
+
+
+The \figref{kdm} presents an overview of the KDM architecture.
+It is divided in twelve packages organized in four layers.
+The UI package is composed by a set of meta-model to represent
+    the components and behavior of the user interface.
+The package action defines meta-models to represent the behavior of an application.
+It can be used to describe the logic of the application, \eg conditions, loop, call.
+It is similar to our behavior meta-model.
+The Data package represents the data from different database.
+It also defines a meta-model for the action of the database,\eg Insert, Update, Delete.
+Those actions can be linked to a trigger and so automatically executed when an event occurs.
+
+\picw{figures/kdmUI.png}{KDM UIResources Class Diagram }{fig:kdmUI}
+
+The \figref{kdmUI} is the UIResources Class Diagram.
+It defines many entities for the abstraction of a user interface.
+
+UIResource can be defined as UIDisplay, UIField or UIEvent.
+A UIField is used to represent forms, text fields, panel, \etc.
+It is similar to the entity Widget in our UI model.
+We can also detect the pattern composite with
+    UIResource and AbstractUIElement.
+This pattern makes the representation of the
+    user interface architecture possible.
+
+UIDisplay can be a Screen or a Report.
+The Screen represents a window for desktop software or a web page.
+The Report represents an element that will be printed.
+This difference between Report and Screen is not represented in our meta-models.
+
+Every AbstractUIElement can have an UIAction.
+A UIAction is used to represent the sequence of display in a user interface.
+It includes the logic to go from a UI to another.
+It is not a navigation model nor a state flow model and
+    it is similar to our behavior model.
+
+A UIAction can performed multiple UIEvent.
+The UIEvent represents the events that belongs to a user interface.
+It can be the callback notion or the idea of navigation (\ie going from one web page to another).
+
+\picw{figures/kdmRelations.png}{KDM UIRelations Class Diagram}{fig:kdmRelations}
+
+The \figref{kdmRelations} is the UIRelations Class Diagram.
+It represents the disposition of the UIElements with the others and the flow from
+    UIDisplay to another.
+
+The flow between two Display is not represented in ours meta-models.
+It defines the behavior of the user interface as the sequential 
+    flow from one instance of the display to another.
+
+The UILayout defines the layout of an AbstractUIElement for a specific Display.
+This notion is similar to our Layout meta-model.
+
+\subsection{IFML}
+\label{sec:ifml}
+
+\citet{brambilla2014interaction} defined the Interaction Flow Modeling Language (IFML) to represent a front-end application.
+The work is defined with the OMG (\url{http://www.ifml.org/}).
+The aim of IFML is to provide a system to describe the view part of an application,
+    with the components and the containers, the state of the components,
+    the logic of the application and the binding between data and user interface.
+
+With IFML, a piece of software can be modeled with one or multiple top-containers.
+The containers represents a main window for a desktop application or one web page for a Web application.
+Then, each containers has sub-containers or can contain a components.
+
+A component is the abstract level of a visible widget.
+This element can have input or output parameters.
+An input parameters from a data ressource means the widget displays the value of the data.
+
+The container and the component can be associate with events.
+An element linked to an event support users' interaction, \eg click, drag-and-drop, \etc.
+Once the action is performed, the effect is represented by an interaction flow connection which connect the event
+    and the elements affected by the event.
+
+
+\section{Reverse engineering strategies}
 \label{sec:reverseEngineering}
 
 \subsection{Static}
