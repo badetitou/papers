@@ -201,7 +201,7 @@ From the decomposition of the GUI application structure (see Section~\ref{sec:gu
 \end{itemize}
 
 
-\subsection{The GUI model}
+\subsection{GUI meta-model}
 \label{sec:guiModel}
 
 In order to represent a GUI, we designed a meta-model presented \figref{guiModel}.
@@ -209,7 +209,7 @@ This GUI model is the first part of the user interface component of
     a graphic application as defined Section~\ref{sec:userInterface}
 In the following, we present the different entities of the meta-model.
 
-\picw{figures/GUIModel.png}{GUI Application Metamodel}{fig:guiModel}
+\picw{figures/GUIModel.png}{GUI Application meta-model}{fig:guiModel}
 
 
 The \textbf{Phase} represents the main container of a user interface page.
@@ -257,7 +257,7 @@ The PopUp can not be considered as a Widget,
 \bv{SHOUDL Disapear and go to the Behavior Model}The \textbf{Service} is the reference to the distant feature the application can call from its GUI.
 In a web context, it can be the server side of the application.
 
-\subsection{The layout model}
+\subsection{Layout meta-model}
 \label{sec:layoutModel}
 
 \bv{Ajouter un layout model}
@@ -273,12 +273,13 @@ Each widget can only have one layout,
 
 
 
-\subsection{The behavior model}
+\subsection{Behavior meta-model}
 \label{sec:behaviorModel}
     
-\picw{figures/BehaviorModel.png}{Behavior Metamodel}{fig:behaviorModel}
+\twocolumnpic{figures/BehaviorModel.png}{Behavior meta-model}{fig:behaviorModel}
 
-The behavior model presented \figref{behaviorModel} is the owner of
+
+The behavior meta-model presented \figref{behaviorModel} is the owner of
     the behavior code.
 There are two main elements, ths statement and the expression.
 
@@ -301,16 +302,14 @@ It is the container of the logic of an event fired by an action.
 Thanks to this model, we are able to represent the logic to execute once an user
     fire an event from an action on a widget of the GUI model.
 
-
-
-\subsection{The business model}
+\subsection{Business meta-model}
 \label{sec:businessModel}  
 
 \bv{Ajouter un business model}
 The business model contains two main composites of the application.
 The data and the information about the distant services.
 
-\subsection{Model View Controller}
+\subsection{Model-View-Controller}
 \label{sec:mvc}
 
 We made a comparaison between our proposed models and the MVC pattern.
@@ -337,6 +336,38 @@ The \tabref{mvcMatching} present the matching between the models.
  %   }
     \end{center}
     \end{table}
+
+The MVC pattern is commonly used for developing user interfaces.
+It divides the application into three parts.
+
+The Model part represents the data of the application.
+It also contains the logic of the data, \eg business rules.
+This kind of data can be internally stored in the application, \ie with local variable,
+    or in a database.
+In the case of a web application,
+    the logic inherent to the data can be contained by the database with stored procedure and triggers
+    or by the back-end application part.
+If the logic is contained in the front-end, it is often considered as a security problem.
+In our proposed meta-models, the Model part of MVC is similar to our Business Model.
+Both contains data and business code.
+
+The View part of the MVC pattern is the visible part of the application.
+It also includes the visual organization of the visibles component.
+It can be a complete web page or window as a unique forms or some buttons.
+The view used the Model part to get the information to display.
+In the case of a web application, the View part is own by the HTML file.
+The View part is similar to our GUI and layout meta-model.
+The GUI model contains at least the visible element which belongs to the View part and
+    the structuring component.
+With the properties of the Widget and the layout meta-model, the meta-models
+    represents how the component should be visually organized.
+
+The Controller part defines the possible actions of the user.
+It is the link between the View part and the Model part through the user.
+In ours meta-models, we define those behavior in the Behavior meta-model.
+Like the Controller part, we make a link with the View thanks to the Behavior entity, 
+    and with the Model with the Distant Service entity.
+Our meta-model is also define to represent any kind of executable code.
 
 \section{Existing solutions}
 \label{sec:solutions}
