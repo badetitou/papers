@@ -355,6 +355,13 @@ We analysed and grouped the meta-models of 14 relevant papers in the
 \subsection{GUI}
 \label{sec:gui}
 
+\bvc{explication gui}The GUI meta-model represents the user interface of the application.
+It is the core meta-model for the representation of a user interface.
+It contains at least the visible widgets.
+The other models extends or add information to this one.
+It also defines the hierarchy structured of the widget which is often
+    represented thanks to the composite pattern.
+
 \begin{table}[hbtp]
 \caption{GUI elements}
 \label{tab:guiElements}
@@ -476,8 +483,17 @@ We can linked this GUI AST to the container pattern we used in our GUI model.
 \subsection{Navigation}
 \label{sec:navigation}
 
+\bvc{explication nav}
+To represent the between to web page.
+It is possible to use a navigation meta-model.
+This model makes the link between two top-level container of
+    an application.
+It can connect two containers directly or through a sub-container or sub-element.
+It is also possible that the model links a element to an event,
+    and this event to a top-level container.
+
 \citet{fleurey2007model} created a navigation meta-model to represent the
-    transition between the different user interfaces or the forms to complete by the user.
+    transition between the different user interfaces or the forms completed by the user.
 The model is also linked to an entity called \textit{Operation} but not well described.
 It still seems to be a way to call specific code to execute.
 The navigation meta-model proposed by the authors is similar to our behavior model.
@@ -494,6 +510,12 @@ All this information are include in our behavior meta-model.
 
 \subsection{State flow}
 \label{sec:state}
+
+\bvc{explication stateflow} 
+The state flow can be defined by a meta-model or properties between entities.
+It is used to represent the link between two states of an application.
+A state is defined by the visible widget and their properties.
+If the value of a property change, a new state is generated.
 
 In order to represent the events, 
     \citet{memon2007eventflow} used the notion of state.
@@ -545,6 +567,13 @@ This last is completely included in our behavior meta-model.
 
 \subsection{Layout}
 \label{sec:layout}
+
+\bvc{explication layout}
+To represent the position of the components of an interface
+    it is possible to use a layout meta-model.
+The proposed meta-model defines multiple common layouts and
+    describes the usage of a layout by a UI component.
+In some papers, the layout is integrated as properties of a component.
 
 \citet{gotti2016java} used a layout meta-model to represent
     the position of the element in the user interface.
