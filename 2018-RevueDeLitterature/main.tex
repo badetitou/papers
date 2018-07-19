@@ -721,6 +721,22 @@ Once the action is performed, the effect is represented by an interaction flow c
     and the elements affected by the event.
 
 
+\picw{figures/ifmlViewElements.png}{IFML View Elements}{fig:ifmlViewElements}
+
+\figref{ifmlViewElements} presents the meta-model \textit{View Elements} proposed
+    by IFML.
+This meta-model has the same aim as the GUI model we designed, \ie representing the
+    visible part of the user interface.
+We notice that they are slightly different.
+Both use a container pattern and so have the notion of container and component, 
+    respectively container and leaf in our meta-model.
+The IFML meta-model introduced the notion of ComponentPart.
+This entity is necessary to represent all the possible component because
+    the authors decided to set elements like a List or a Form as a Component.
+In our case, a List is represented as a Container,
+    so we do not need a ComponentPart because we can use container pattern to
+    represent the sub-element of a component.
+
 \section{Reverse engineering strategies}
 \label{sec:reverseEngineering}
 
