@@ -402,7 +402,7 @@ It also defines the hierarchy structured of the widget which is often
         \hline
         SubWidgets & \citep{gotti2016java,sanchez2014model, memon2007eventflow} \\
         \hline
-        Events & \citep{gotti2016java, fleurey2007model, morgado2011reverse, garces2017white, memon2007eventflow, samir2007swing2script, joorabchi2012reverse,  amalfitano2012using, silva2010guisurfer} \\
+        Actions & \citep{gotti2016java, fleurey2007model, morgado2011reverse, garces2017white, memon2007eventflow, samir2007swing2script, joorabchi2012reverse,  amalfitano2012using, silva2010guisurfer} \\
         \hline
         Properties & \citep{gotti2016java, sanchez2014model, morgado2011reverse, garces2017white, memon2007eventflow, samir2007swing2script, shah2011reverse, joorabchi2012reverse, MemonWCRE2003, mesbah2012crawling, amalfitano2012using, silva2010guisurfer} \\
         \hline
@@ -510,6 +510,26 @@ Finally, \citet{silva2010guisurfer} used a GUI meta-model but did not present it
     in them paper.
 However, they explain that they use a GUI AST to detect the fragment that represents the user interface.
 We can linked this GUI AST to the container pattern we used in our GUI model.
+
+
+We saw that the container pattern is often use to represent the hierarchy of widget.
+However, we detected three kind of entities linked to the widget entity. 
+The first one is the notion of sub-widget.
+A sub-widget is an extension of the container or the leaf entity,
+    it could be the definition of a form, a panel, a textfield, a list, \etc.
+The second one is the action.
+An action is linked to a widget.
+When a widget has an action, a user can performed this action on the widget and it will
+    have an impact on the user interface.
+The last one is the notion of property.
+It represents a customisation of a widget.
+
+\tabref{guiElements} synthesizes which papers defines those entities.
+Almost all the GUI model use the properties and the actions but
+    only three use the sub-widget.
+We also defined Actions and Property entity.
+We do not have integrated directly the sub-widgets, but it is possible to create an extension to our meta-model
+    to represent themselves.
 
 \subsection{Navigation}
 \label{sec:navigation}
